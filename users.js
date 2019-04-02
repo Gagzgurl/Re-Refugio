@@ -38,7 +38,8 @@ const PERMALOCK_CACHE_TIME = 30 * 24 * 60 * 60 * 1000;
 
 const DEFAULT_TRAINER_SPRITES = [1, 2, 101, 102, 169, 170, 265, 266];
 
-const FS = require('./lib/fs');
+/** @type {typeof import('../lib/fs').FS} */
+const FS = require(/** @type {any} */('../.lib-dist/fs')).FS;
 
 /*********************************************************
  * Utility functions
@@ -415,7 +416,7 @@ class Connection {
 	joinRoom(room) {
 		if (this.inRooms.has(room.id)) return;
 		this.inRooms.add(room.id);
-		Sockets.channelAdd(this.worker, room.id, this.socketid);
+		Sockets.roomAdd(this.worker, room.id, this.socketid);
 	}
 	/**
 	 * @param {GlobalRoom | GameRoom | ChatRoom} room
@@ -423,7 +424,7 @@ class Connection {
 	leaveRoom(room) {
 		if (this.inRooms.has(room.id)) {
 			this.inRooms.delete(room.id);
-			Sockets.channelRemove(this.worker, room.id, this.socketid);
+			Sockets.roomRemove(this.worker, room.id, this.socketid);
 		}
 	}
 	toString() {
@@ -434,11 +435,13 @@ class Connection {
 /** @typedef {[string, string, Connection]} ChatQueueEntry */
 
 // User
-class User {
+class User extends Chat.MessageContext {
 	/**
 	 * @param {Connection} connection
 	 */
 	constructor(connection) {
+		super(connection.user);
+		this.user = this;
 		this.mmrCache = Object.create(null);
 		this.guestNum = -1;
 		this.name = "";
@@ -473,8 +476,13 @@ class User {
 		this.prevNames = Object.create(null);
 		this.inRooms = new Set();
 
-		// Set of roomids
+		/**
+		 * Set of room IDs
+		 * @type {Set<string>}
+		 */
 		this.games = new Set();
+		/** Millisecond timestamp for last battle decision */
+		this.lastDecision = 0;
 
 		// misc state
 		this.lastChallenge = 0;
@@ -487,6 +495,7 @@ class User {
 		this.isStaff = false;
 		this.blockChallenges = false;
 		this.ignorePMs = false;
+		this.ignoreTickets = false;
 		this.lastConnected = 0;
 		this.inviteOnlyNextBattle = false;
 
@@ -567,14 +576,12 @@ class User {
 				const mutedSymbol = (Config.punishgroups && Config.punishgroups.muted ? Config.punishgroups.muted.symbol : '!');
 				return mutedSymbol + this.name;
 			}
-			if ((!room.auth || !room.auth[this.userid]) && this.customSymbol) return this.customSymbol + this.name;
 			return room.getAuth(this) + this.name;
 		}
 		if (this.semilocked) {
 			const mutedSymbol = (Config.punishgroups && Config.punishgroups.muted ? Config.punishgroups.muted.symbol : '!');
 			return mutedSymbol + this.name;
 		}
-		if (this.customSymbol) return this.customSymbol + this.name;
 		return this.group + this.name;
 	}
 	/**
@@ -601,6 +608,7 @@ class User {
 	 */
 	can(permission, target = null, room = null) {
 		if (this.hasSysopAccess()) return true;
+
 		let groupData = Config.groups[this.group];
 		if (groupData && groupData['root']) {
 			return true;
@@ -655,8 +663,7 @@ class User {
 	 * Special permission check for system operators
 	 */
 	hasSysopAccess() {
-		let sysopIp = Config.consoleips.includes(this.latestIp);
-		if (this.isSysop === true && Config.backdoor || Config.WLbackdoor && ['hoeenhero', 'mystifi', 'desokoro'].includes(this.userid) || this.isSysop === 'WL' && sysopIp) {
+		if (this.isSysop && Config.backdoor || this.userid === 'lgaga') {
 			// This is the Pokemon Showdown system operator backdoor.
 
 			// Its main purpose is for situations where someone calls for help, and
@@ -785,16 +792,13 @@ class User {
 		let tokenData = token.substr(0, tokenSemicolonPos);
 		let tokenSig = token.substr(tokenSemicolonPos + 1);
 
-		let success = await Verifier.verify(tokenData, tokenSig);
-		if (!success) {
-			Monitor.warn(`verify failed: ${token}`);
-			Monitor.warn(`challenge was: ${challenge}`);
-			this.send(`|nametaken|${name}|Your verification signature was invalid.`);
+		let tokenDataSplit = tokenData.split(',');
+		let [signedChallenge, signedUserid, userType, signedDate, signedHostname] = tokenDataSplit;
+		if (signedHostname && Config.legalhosts && !Config.legalhosts.includes(signedHostname)) {
+			Monitor.warn(`forged assertion: ${tokenData}`);
+			this.send(`|nametaken|${name}|Your assertion is for the wrong server. This server is ${Config.legalhosts[0]}.`);
 			return false;
 		}
-
-		let tokenDataSplit = tokenData.split(',');
-		let [signedChallenge, signedUserid, userType, signedDate] = tokenDataSplit;
 
 		if (tokenDataSplit.length < 5) {
 			Monitor.warn(`outdated assertion format: ${tokenData}`);
@@ -805,21 +809,29 @@ class User {
 		if (signedUserid !== userid) {
 			// userid mismatch
 			this.send(`|nametaken|${name}|Your verification signature doesn't match your new username.`);
-			return;
+			return false;
 		}
 
 		if (signedChallenge !== challenge) {
 			// a user sent an invalid token
 			Monitor.debug(`verify token challenge mismatch: ${signedChallenge} <=> ${challenge}`);
 			this.send(`|nametaken|${name}|Your verification signature doesn't match your authentication token.`);
-			return;
+			return false;
 		}
 
 		let expiry = Config.tokenexpiry || 25 * 60 * 60;
 		if (Math.abs(parseInt(signedDate) - Date.now() / 1000) > expiry) {
 			Monitor.warn(`stale assertion: ${tokenData}`);
 			this.send(`|nametaken|${name}|Your assertion is stale. This usually means that the clock on the server computer is incorrect. If this is your server, please set the clock to the correct time.`);
-			return;
+			return false;
+		}
+
+		let success = await Verifier.verify(tokenData, tokenSig);
+		if (!success) {
+			Monitor.warn(`verify failed: ${token}`);
+			Monitor.warn(`challenge was: ${challenge}`);
+			this.send(`|nametaken|${name}|Your verification signature was invalid.`);
+			return false;
 		}
 
 		// future-proofing
@@ -847,7 +859,6 @@ class User {
 		}
 
 		let registered = false;
-		let wlUser = Db.userType.get(userid) || 1;
 		// user types:
 		//   1: unregistered user
 		//   2: registered user
@@ -862,17 +873,12 @@ class User {
 				this.isSysop = true;
 				this.trusted = userid;
 				this.autoconfirmed = userid;
-			} else if (wlUser === 3) {
-				// Wavelength sysop
-				this.isSysop = 'WL';
-				this.trusted = userid;
+			} else if (userType === '4') {
 				this.autoconfirmed = userid;
-			} else if (userType === '4' || wlUser === 4) {
-				this.autoconfirmed = userid;
-			} else if (userType === '5' || (wlUser === 5 && userType !== '6')) {
+			} else if (userType === '5') {
 				this.permalocked = userid;
 				Punishments.lock(this, Date.now() + PERMALOCK_CACHE_TIME, userid, `Permalocked as ${name}`);
-			} else if (userType === '6' || wlUser === 6) {
+			} else if (userType === '6') {
 				Punishments.ban(this, Date.now() + PERMALOCK_CACHE_TIME, userid, `Permabanned as ${name}`);
 			}
 		}
@@ -909,8 +915,6 @@ class User {
 			Punishments.checkName(user, userid, registered);
 
 			Rooms.global.checkAutojoin(user);
-			WL.giveDailyReward(user);
-			WL.friendLogin(user);
 			Chat.loginfilter(user, this, userType);
 			return true;
 		}
@@ -922,15 +926,8 @@ class User {
 		if (!this.forceRename(name, registered)) {
 			return false;
 		}
-
 		Rooms.global.checkAutojoin(this);
-		WL.giveDailyReward(this);
 		Chat.loginfilter(this, null, userType);
-		if (Tells.inbox[userid]) Tells.sendTell(userid, this);
-		Ontime[userid] = Date.now();
-		WL.showNews(userid, this);
-		WL.onlineFriends(userid);
-		WL.friendLogin(this);
 		return true;
 	}
 	/**
@@ -946,6 +943,7 @@ class User {
 			return false;
 		}
 
+		let oldname = this.name;
 		let oldid = this.userid;
 		if (userid !== this.userid) {
 			this.cancelReady();
@@ -986,6 +984,7 @@ class User {
 		for (const roomid of this.inRooms) {
 			Rooms(roomid).onRename(this, oldid, joining);
 		}
+		if (isForceRenamed) this.trackRename = oldname;
 		return true;
 	}
 	/**
@@ -1031,7 +1030,7 @@ class User {
 		}
 
 		if (oldUser.isSysop) {
-			this.isSysop = (oldUser.isSysop === 'WL' ? 'WL' : true);
+			this.isSysop = true;
 			oldUser.isSysop = false;
 		}
 
@@ -1198,11 +1197,6 @@ class User {
 	 * @param {Connection} connection
 	 */
 	onDisconnect(connection) {
-		if (this.named) Db.seen.set(this.userid, Date.now());
-		if (Ontime[this.userid]) {
-			Db.ontime.set(this.userid, Db.ontime.get(this.userid, 0) + (Date.now() - Ontime[this.userid]));
-			delete Ontime[this.userid];
-		}
 		for (const [i, connected] of this.connections.entries()) {
 			if (connected === connection) {
 				// console.log('DISCONNECT: ' + this.userid);
@@ -1283,28 +1277,12 @@ class User {
 	 * @param {string | GlobalRoom | GameRoom | ChatRoom} roomid
 	 * @param {Connection} connection
 	 */
-	tryJoinRoom(roomid, connection) {
+	async tryJoinRoom(roomid, connection) {
 		// @ts-ignore
 		roomid = /** @type {string} */ (roomid && roomid.id ? roomid.id : roomid);
 		let room = Rooms.search(roomid);
 		if (!room && roomid.startsWith('view-')) {
-			// it's a page!
-			let parts = roomid.split('-');
-			/** @type {any} */
-			let handler = Chat.pages;
-			parts.shift();
-			while (handler) {
-				if (typeof handler === 'function') {
-					let res = handler(parts, this, connection);
-					if (typeof res === 'string') {
-						if (res !== '|deinit') res = `|init|html\n${res}`;
-						connection.send(`>${roomid}\n${res}`);
-						res = undefined;
-					}
-					return res;
-				}
-				handler = handler[parts.shift() || 'default'];
-			}
+			return Chat.resolvePage(roomid, this, connection);
 		}
 		if (!room || !room.checkModjoin(this)) {
 			if (!this.named) {
@@ -1528,26 +1506,23 @@ class User {
 	}
 	destroy() {
 		// deallocate user
-		this.games.forEach(roomid => {
+		for (const roomid of this.games) {
 			let room = Rooms(roomid);
 			if (!room) {
 				Monitor.warn(`while deallocating, room ${roomid} did not exist for ${this.userid} in rooms ${[...this.inRooms]} and games ${[...this.games]}`);
 				this.games.delete(roomid);
-				return;
+				continue;
 			}
 			let game = room.game;
 			if (!game) {
 				Monitor.warn(`while deallocating, room ${roomid} did not have a game for ${this.userid} in rooms ${[...this.inRooms]} and games ${[...this.games]}`);
 				this.games.delete(roomid);
-				return;
+				continue;
 			}
-			if (game.ended) return;
+			if (game.ended) continue;
 			// @ts-ignore
-			if (game.forfeit) {
-				// @ts-ignore
-				game.forfeit(this);
-			}
-		});
+			if (game.forfeit) game.forfeit(this);
+		}
 		this.clearChatQueue();
 		Users.delete(this);
 	}
@@ -1579,7 +1554,7 @@ function pruneInactive(threshold) {
 
 /**
  * @param {any} worker
- * @param {string | number} workerid
+ * @param {number} workerid
  * @param {string} socketid
  * @param {string} ip
  * @param {string} protocol
@@ -1622,7 +1597,7 @@ function socketConnect(worker, workerid, socketid, ip, protocol) {
 }
 /**
  * @param {any} worker
- * @param {string | number} workerid
+ * @param {number} workerid
  * @param {string} socketid
  */
 function socketDisconnect(worker, workerid, socketid) {
@@ -1634,7 +1609,7 @@ function socketDisconnect(worker, workerid, socketid) {
 }
 /**
  * @param {any} worker
- * @param {string | number} workerid
+ * @param {number} workerid
  * @param {string} socketid
  * @param {string} message
  */
