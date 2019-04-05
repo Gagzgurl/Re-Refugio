@@ -14,7 +14,7 @@ exports.WL = {
 	// usage: WL.nameColor(user.name, true) for bold OR WL.nameColor(user.name, false) for non-bolded.
 
 	messageSeniorStaff: function (message, pmName, from) {
-		pmName = (pmName ? pmName : '~Wavelength Server');
+		pmName = (pmName ? pmName : '~Server');
 		from = (from ? ' (PM from ' + from + ')' : '');
 		Users.users.forEach(curUser => {
 			if (curUser.can('roomowner')) {
@@ -109,7 +109,7 @@ exports.WL = {
 			Db.DailyBonus.set(ip, [reward, Date.now()]);
 		}
 		Economy.writeMoney(user.userid, reward);
-		user.send('|popup||wide||html| <center><u><b><font size="3">Wavelength Daily Bonus</font></b></u><br>You have been awarded ' + reward + ' Stardust.<br>' + showDailyRewardAni(reward) + '<br>Because you have connected to the server for the past ' + (reward === 1 ? 'Day' : reward + ' Days') + '.</center>');
+		user.send('|popup||wide||html| <center><u><b><font size="3">Server Daily Bonus</font></b></u><br>You have been awarded ' + reward + ' Stardust.<br>' + showDailyRewardAni(reward) + '<br>Because you have connected to the server for the past ' + (reward === 1 ? 'Day' : reward + ' Days') + '.</center>');
 	},
 };
 
@@ -128,7 +128,7 @@ function saveRegdateCache() {
 function showDailyRewardAni(streak) {
 	let output = '';
 	for (let i = 1; i <= streak; i++) {
-		output += "<img src='http://i.imgur.com/ZItWCLB.png' width='16' height='16'> ";
+		output += "<img src='https://i.imgur.com/nSTyCYH.png' width='16' height='16'> ";
 	}
 	return output;
 }
