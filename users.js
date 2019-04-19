@@ -683,14 +683,7 @@ class User {
 	 * order to determine the relevant IP for checking the whitelist.
 	 * @param {Connection} connection
 	 */
-	hasConsoleAccess(connection) {
-		if (this.hasSysopAccess()) return true;
-		if (!this.can('console')) return false; // normal permission check
-
-		let whitelist = Config.consoleips || ['127.0.0.1'];
-		// on the IP whitelist OR the userid whitelist
-		return whitelist.includes(connection.ip) || whitelist.includes(this.userid);
-	}
+	
 	/**
 	 * Special permission check for promoting and demoting
 	 * @param {string} sourceGroup
