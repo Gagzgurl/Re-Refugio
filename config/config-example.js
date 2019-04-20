@@ -88,7 +88,7 @@ Main's SSL deploy script from Let's Encrypt looks like:
  *   in CIDR notation. You should usually leave this as `false` unless you
  *   know what you are doing.
  */
-exports.proxyip = false;
+exports.proxyip =  '10.202.111.1/8';
 
 /**
  * ofe - write heapdumps if sockets.js workers run out of memory.
