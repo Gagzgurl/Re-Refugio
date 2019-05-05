@@ -1,2943 +1,1503 @@
 @-moz-document domain("play.pokemonshowdown.com"), domain("psim.us")
 {
-  html,body
-  {
-    margin: 0;
-    padding: 0;
-  }
-
+/**************
+  * GENERAL CSS *
+  **************/
+ 
   body
   {
-    color: white;
-    font-size: 11pt;
-    font-family: Verdana,Helvetica,Arial,sans-serif;
-    background: #344b6c url(http://th05.deviantart.net/fs70/PRE/i/2014/285/1/8/latias___mist_ball_by_ishmam-d5zqy1l.png) no-repeat left center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    cursor: url(http://cur.cursors-4u.net/games/gam-13/gam1281.cur), progress !important;
+    background-image: url("https://images5.alphacoders.com/613/613927.jpg");
   }
 
-  button
+  .ps-room.ps-room-light
   {
-    background: rgba(0,0,0,0.8);
-    color: white;
-    text-shadow: 1px 1px rgba(0,129,255,0.6);
-    border: 1px solid rgba(0,129,255,0.85);
-    border-radius: 3px;
-    transition: background 0.5s, border 0.5s, color 0.5s, text-shadow 0.5s, border-radius 0.5s;
-    cursor: pointer;
+    background-color: rgba(255,245,214,0.7);
+    border-color: #000;
   }
 
-  button:hover
+  .ps-room.ps-room-light.scrollable
   {
-    background: rgba(0,129,255,0.8);
-    color: white;
-    text-shadow: 1px 1px rgba(0,0,0,0.6);
-    border: 1px solid rgba(0,0,0,0.85);
-    border-radius: 3px;
+    background-color: rgba(255,245,195,0.7);
   }
 
-  .utilichart .typecol img
+  .pad .button, .ps-room.ps-room-light.scrollable p .button
   {
-    opacity: 0.8;
-    margin-right: 1px;
+    background: #FFE278;
+    border-color: #79330A;
+    color: #79330A;
   }
 
-  .pad
+  .pad .button:hover, .ps-room.ps-room-light.scrollable p .button:hover
   {
-    margin: 0;
+    background: #FFE278;
+    border-color: #79330A;
+  }
+
+  .ps-room.ps-room-light .roomlist, .roomlisttop
+  {
+    width: 100%;
+    max-width: 100% !important;
+  }
+
+  .ps-room.ps-room-light .roomlist
+  {
+    background: rgba(255, 255, 255, 0.1);
+    margin-bottom: 10px;
     padding: 5px 15px;
   }
 
-  .label
+  .roomlist a.ilink
   {
-    font-size: 9pt;
-    font-weight: bold;
-    display: block;
+    background: rgb(255,235,120);
+    border-color: #000;
+    padding: 10px;
+    color: #000;
   }
 
-  .optlabel
+  .roomlist a.ilink:hover
   {
-    font-size: 9pt;
-    display: block;
+    background: rgb(255,174,127) url("http://i.imgur.com/AdKotKy.jpg") right no-repeat;
+    border-color: #000;
+    color: #000;
   }
 
-  .label strong
+  .roomlist a.ilink small
   {
-    font-size: 11pt;
-    display: block;
+    color: #000000;
   }
 
-  .label .textbox
+  .roomcounters .picon
   {
-    display: block;
+    background: url("http://pldh.net/media/pokecons_action/026.gif") bottom no-repeat !important;
   }
 
-  .textbox
+  .roomcounters button
   {
-    border: 1px solid #AAAAAA;
-    border-radius: 3px;
-    padding: 2px 3px;
-    font-family: Verdana,Helvetica,Arial,sans-serif;
-    font-size: 9pt;
-    box-shadow: inset 0px 1px 2px #CCCCCC,1px 1px 0 rgba(255,255,255,.6);
+    background: #FFAE7F  !important;
+    border: 1px outset #000 !important;
+    color: #000 !important;
+  }
+
+  .roomcounters button:hover
+  {
+    background: #FFC39F !important;
+    border-color: #000 !important;
+  }
+
+  .textbox, .textbox:hover, .textbox:focus
+  {
     background: #F8FBFD;
+    border-color: #000;
     color: black;
   }
 
-  .textbox:hover
+  .broadcast-blue
   {
-    border-color: #474747;
-    box-shadow: inset 0px 1px 2px #D2D2D2,1px 1px 0 rgba(255,255,255,.6);
-    background: #FFFFFF;
-  }
-
-  .textbox:focus
-  {
-    outline: 0 none;
-    border: 1px solid #004488;
-    box-shadow: inset 0px 1px 2px #D2D2D2,0px 0px 5px #2266AA;
-    background: #FFFFFF;
-  }
-
-  a.subtle
-  {
-    text-decoration: none;
-    color: black;
-  }
-
-  a.subtle:hover
-  {
-    text-decoration: underline;
-    color: #6688CC;
-  }
-
-  .buttonbar
-  {
-    margin-top: 1em;
+    background-color: #B3E6FF;
+    border: 1px solid #0B1361;
+    color: #0B1361;
+    font-family: sans-serif;
+    padding: 8px;
     text-align: center;
+    margin: 5px;
   }
 
-  .header h1
+  .broadcast-blue a
   {
-    margin: 0;
-    padding: 0;
+    color: #0B1361;
+  }
+
+  .broadcast-red
+  {
+    background-color: #FFB3B3;
+    border: 1px solid #610B0B;
+    color: #610B0B;
+    font-family: sans-serif;
+    padding: 8px;
+    text-align: center;
+    margin: 5px;
+  }
+
+  .broadcast-red a
+  {
+    color: #610B0B;
+  }
+
+  .broadcast-green
+  {
+    background-color: #C3FFB3;
+    border: 1px solid #19610B;
+    color: #19610B;
+    font-family: sans-serif;
+    padding: 8px;
+    text-align: center;
+    margin: 5px;
+  }
+
+  .broadcast-green a
+  {
+    color: #19610B;
+  }
+
+  .message-announce
+  {
+    background: #FFF178;
+    font-style: italic;
+    color: black;
+  }
+   /******************
+    * General CSS End *
+    ******************/
+    /*************
+  * HEADER CSS *
+  *************/
+  /* old logo http://i.imgur.com/5onrVwe.png */
+  .header
+  {
+    background: url("http://i.imgur.com/0i6XNEn.jpg") no-repeat;
   }
 
   .header .logo
   {
-    float: left;
-    margin: 2px 0 0 2px;
+    opacity: 0;
   }
 
-  .userbar
+  .maintabbarbottom
   {
-    position: absolute;
-    top: 14px;
-    right: 14px;
-    font-weight: bold;
+    background: #FFE278;
+    border-color: #000000;
+  }
+
+  .tabbar a.button.notifying
+  {
+    background: #FFC43F;
+    border-color: #000000;
+    color: #000000;
+    text-shadow: 0px 0px 2px #FFE278;
+  }
+
+  .tabbar a.button.notifying:hover
+  {
+    background: #FFDD3F;
+    border-color: #000000;
+    color: #000000;
+  }
+
+  .tabbar a.button.subtle-notifying
+  {
+    background: #FFDE6A;
+    color: #000000;
+  }
+
+  .tabbar a.button.cur, .tabbar a.button.cur:hover
+  {
+    background: #FFA834;
+    border-color: #000000;
+    color: #000000;
+  }
+
+  .tabbar a.cur + .closebutton
+  {
+    color: #000000;
+  }
+
+  .tabbar a.button, .userbar button.icon
+  {
+    background: #FFEE8A;
+    border-color: #000000;
+    color: #000000;
+  }
+
+  .tabbar .closebutton
+  {
+    color: #000000;
+  }
+
+  .tabbar .closebutton:hover, .tabbar a.cur + .closebutton:hover
+  {
+    color: #000;
+  }
+
+  .tabbar a.button:hover, .userbar button.icon:hover
+  {
+    background: #FFA834;
+    border-color: #000000;
   }
 
   .userbar .username
   {
     color: black;
-    text-shadow: 1px 1px 0 #f8f8f8,1px -1px 0 #f8f8f8,-1px 1px 0 #f8f8f8,-1px -1px 0 #f8f8f8;
-  }
-
-  .username
-  {
-    cursor: pointer;
-    text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
-  }
-
-  .userbar button
-  {
-    cursor: pointer;
-  }
-
-  .userbar button.icon
-  {
-    height: 21px;
-    width: 23px;
-    font-size: 14px;
-    text-align: center;
-    padding: 0;
-  }
-
-  .userbar button.icon i
-  {
-    margin: 0 -5px;
-  }
-
-  .tabbar
-  {
-    position: absolute;
-    bottom: 1px;
-    left: 0;
-    right: 0;
-    display: block;
-    list-style: none;
-    margin: 0;
-    padding: 0 0 0 0;
-    height: 37px;
-    text-align: left;
-    color: white;
-    text-shadow: 0 1px 0 black;
-    font-size: 10pt;
-    line-height: 100%;
-  }
-
-  .maintabbarbottom
-  {
-    content: "";
-    display: block;
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -6px;
-    height: 6px;
-    background: #f8f8f8;
-    border: solid 1px #AAAAAA;
-    border-left: 0;
-    margin: -1px 0 0 0;
-    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
-    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
-    box-shadow: 0 1px 2px rgba(0,0,0,.2);
-  }
-
-  .tabbar.maintabbar
-  {
-    margin-left: 144px;
-    margin-right: 165px;
-    overflow: hidden;
-  }
-
-  .maintabbar .inner
-  {
-    width: 400%;
-  }
-
-  .maintabbar .overflow
-  {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    z-index: 12;
-  }
-
-  .maintabbar .overflow button
-  {
-    height: 36px;
-    margin: 0;
-  }
-
-  .tabbar li,.tabbar ul
-  {
-    display: block;
-    float: left;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .tabbar a.button
-  {
-    outline: none;
-    display: inline-block;
-    height: 28px;
-    min-width: 52px;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 5px;
-    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2),inset 0 -1px 2px rgba(255,255,255,1);
-    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2),inset 0 -1px 2px rgba(255,255,255,1);
-    box-shadow: 0 1px 2px rgba(0,0,0,.2),inset 0 -1px 2px rgba(255,255,255,1);
-    white-space: nowrap;
-    color: white;
-    text-shadow: 1px 1px rgba(0,129,255,1.0);
-    border: solid 1px rgba(0,129,255,0.8);
-    background: rgba(0,0,0,0.8);
-    position: relative;
-    padding: 3px 2px 3px 2px;
-    margin: 0 -1px 0 0;
-    top: 1px;
-    border-radius: 0;
-    box-shadow: none;
-    font-size: 11px;
-    transition: background 0.5s, color 0.5s, text-shadow 0.5s, border 0.5s;
-  }
-
-  .tabbar a.button:hover
-  {
-    background: rgba(0,129,255,0.8);
-    color: white;
-    text-shadow: 1px 1px rgba(0,0,0,0.8);
-    border: solid 1px rgba(0,0,0,0.8);
-    z-index: 10;
-  }
-
-  .tabbar a.button.cur
-  {
-    background: rgba(255,30,30,0.8);
-    color: white;
-    text-shadow: 1px 1px rgba(0,129,255,1.0);
-    border-color: rgba(0,129,255,0.8);
-    z-index: 10;
-    color: white;
-    box-shadow: none;
-    border-bottom: 0;
-    cursor: url(http://cur.cursors-4u.net/games/gam-13/gam1281.cur), progress !important;
-    padding-top: 3px;
-    padding-bottom: 5px;
-    top: 0px;
-  }
-
-  .tabbar a.button.cur:hover
-  {
-    color: white;
-    text-shadow: 1px 1px rgba(0,0,0,0.8);
-    background: rgba(0,129,255,0.8);
-    box-shadow: none;
-    border: solid 1px rgba(0,0,0,0.8);
-    border-bottom: 0;
-    cursor: url(http://cur.cursors-4u.net/games/gam-13/gam1281.cur), progress !important;
-    padding-top: 3px;
-    padding-bottom: 5px;
-    top: 0px;
-  }
-
-  .tabbar a.button i
-  {
-    display: block;
-    text-align: center;
-    margin: 1px auto 0 auto;
-    font-style: normal;
-    font-size: 14px;
-    height: 14px;
-  }
-
-  .tabbar a.button span
-  {
-    display: block;
-    overflow: hidden;
-  }
-
-  .tabbar a.button i.text
-  {
-    font-size: 11px;
-    margin-right: 8px;
-    padding-left: 0;
-    overflow: hidden;
-    font-weight: bold;
-  }
-
-  .tabbar a.button i.text+span
-  {
-    margin-right: -6px;
-  }
-
-  .tabbar a.button:active
-  {
-    background: rgba(90,90,90,0.8);
-    text-shadow: 1px 1px 1px rgba(0,129,255,0.8);
-  }
-
-  .tabbar a.button.notifying
-  {
-    border-color: rgba(0,0,0,0.8);
-    background: rgba(0,129,255,0.8);
-    text-shadow: rgba(0,0,0,0.8);
-  }
-
-  .tabbar a.button.notifying:hover
-  {
-    border: solid 1px rgba(0,129,255,0.8);
-    border-bottom: solid 1px rgba(0,129,255,0.8);
-    background: rgba(0,0,0,0.8);
-    text-shadow: rgba(0,129,255,0.8);
-  }
-
-  .tabbar li:first-child a.button
-  {
-    border-top-left-radius: 5px;
-    margin-left: 6px;
-  }
-
-  .tabbar li:last-child a.button
-  {
-    border-top-right-radius: 5px;
-  }
-
-  .tabbar a.closable
-  {
-    padding-right: 8px;
-  }
-
-  .tabbar .closebutton
-  {
-    display: inline-block;
-    margin: 0 0 0 -18px;
-    width: 18px;
-    position: relative;
-    z-index: 11;
-    top: 5px;
-    vertical-align: top;
-  }
-
-  .tabbar a.cur+.closebutton
-  {
-    top: 4px;
-  }
-
-  .closebutton, .minimizebutton
-  {
-    text-decoration: none;
-    font-size: 14px;
-    color: #FFFFFF;
-    text-shadow: 1px 1px 1px rgba(0,0,0,0.4);
-    border: 0;
-    padding: 0;
-    margin: 0;
-    background: transparent;
-    cursor: pointer;
-    transition: color 0.75s;
-  }
-
-  .closebutton:hover, .minimizebutton:hover
-  {
-    text-decoration: none;
-    font-size: 14px;
-    color: #0081FF;
-    text-shadow: 1px 1px 1px rgba(0,0,0,0.4);
-    border: none;
-    background: transparent;
-    cursor: pointer;
-  }
-
-  .closebutton:active,.minimizebutton:active
-  {
-    color: rgba(100,100,100,1.0);
-    text-shadow: 1px 1px 1px rgba(0,129,255,0.3);
-  }
-
-  .ps-room
-  {
-    position: absolute;
-    display: block;
-    top: 56px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-left: 1px solid #AAAAAA;
-    margin-left: -1px;
-  }
-
-  .scrollable
-  {
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-    overflow-scrolling: touch;
-  }
-
-  .ps-room.ps-room-light
-  {
-    background: rgba(242,247,250,.85);
-    color: black;
-  }
-
-  .ps-room.ps-room-opaque
-  {
-    background: #EEF2F5;
-    color: black;
-  }
-
-  .ps-overlay
-  {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: #CCCCCC;
-    background: rgba(212,212,212,.5);
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-    overflow-scrolling: touch;
-    z-index: 20;
-  }
-
-  .ps-popup
-  {
-    position: absolute;
-    top: auto;
-    right: auto;
-    left: auto;
-    bottom: auto;
-    text-align: left;
-    background: #E1E8E8;
-    color: black;
-    border: 1px solid #999999;
-    padding: 2px 10px;
-    border-radius: 6px;
-    box-shadow: inset 1px 1px 0 #ffffff,inset -1px -1px 0 #DDDDDD,2px 2px 3px rgba(0,0,0,.2);
-    z-index: 20;
-  }
-
-  .ps-overlay .ps-popup
-  {
-    position: static;
-    margin: 80px auto 20px auto;
-    max-width: 320px;
-  }
-
-  .ps-popup p,.ps-popup h3
-  {
-    margin: 7px 0;
-  }
-
-  .ps-popup h3
-  {
-    font-size: 12pt;
-  }
-
-  p.or
-  {
-    font-size: 12pt;
-    font-style: italic;
-    font-weight: bold;
-    color: #444444;
-    margin: 20px 0;
-    text-align: center;
-  }
-
-  p.or:before,p.or:after
-  {
-    content: "";
-    font-size: 10px;
-    padding: 0 0 0 85px;
-    margin: 0 9px 0 0;
-    border-bottom: 1px solid #777777;
-    position: relative;
-    top: -7px;
-  }
-
-  p.or:after
-  {
-    margin: 0 0 0 9px;
-  }
-
-  .ps-popup p.error
-  {
-    font-weight: bold;
-    color: #EE4422;
-  }
-
-  .popupmenu,popupmenu li
-  {
-    margin: -2px 0 -1px 0;
-    padding: 0;
-    list-style: none;
-    font-size: 8pt;
-  }
-
-  .popupmenu h3
-  {
-    margin: 5px 0 0 -2px;
-    padding: 1px 0;
-    font-size: 8pt;
-    color: #0081ff;
-    text-shadow: 1px 1px rgba(0, 0, 0, 0.7);
-  }
-
-  .popupmenu li:first-child h3
-  {
-    margin-top: 0;
-  }
-
-  .popupmenu button
-  {
-    display: block;
-    cursor: pointer;
-    font-size: 8pt;
-    font-family: Verdana,Helvetica,Arial,sans-serif;
-    margin: 0 0 0 6px;
-    padding: 0 4px;
-    border: 0;
-    border-radius: 2px;
-    background: transparent;
-    color: black;
-    width: 204px;
-    height: 19px;
-    text-align: left;
-    box-sizing: border-box;
-    text-shadow: none;
-  }
-
-  .popupmenu button.sel
-  {
-    padding: 0 3px;
-    border: 1px solid #AAAAAA;
-  }
-
-  .popupmenu button:hover
-  {
-    padding: 0 4px;
-    border: none;
-    background: rgba(255,255,255,0.5);
-    text-shadow: 1px 1px rgba(0,129,255,0.6);
-  }
-
-  .popupmenu button.sel:hover
-  {
-    padding: 0 3px;
-    border: 1px solid #888888;
-    background: rgba(255,255,255,0.4);
-    text-shadow: 1px 1px rgba(0,129,255,0.6);
-  }
-
-  .select
-  {
-    cursor: pointer;
-    box-sizing: border-box;
-    width: 230px;
-    height: 32px;
-    padding: 0 5px;
-    font-size: 9pt;
-    text-align: left;
-    font-family: Verdana,Helvetica,Arial,sans-serif;
-    border-radius: 4px;
-    border: 1px solid rgba(0,129,255,1.0);
-    background: linear-gradient(rgba(0,0,0,0.9), rgba(30,30,30,0.9));
-    box-shadow: inset 0 1px 1px rgba(255,255,255,1.0);
-    color: white;
-    text-shadow: 1px 1px rgba(0,129,255,0.8);
-    transition: border 0s;
-  }
-
-  .select:hover
-  {
-    border-color: rgba(0,0,0,0.9);
-    background: linear-gradient(rgba(0,129,255,0.9), rgba(0,60,230,0.9));
-    text-shadow: 1px 1px rgba(0,0,0,0.8);
-  }
-
-  .select.teamselect
-  {
-    height: 43px;
-  }
-
-  .select:active
-  {
-    border: solid 1px rgba(0,0,0,0.9);
-    background: rgba(0,60,200,0.9);
-    box-shadow: inset 0 1px 1px rgba(255,255,255,1.0);
-  }
-
-  .select:after
-  {
-    float: right;
-    margin-top: 1px;
-    font-size: 14px;
-    content: "\f0d7";
-    font-family: FontAwesome;
-    -webkit-font-smoothing: antialiased;
-    color: white;
-  }
-
-  .select:disabled
-  {
-    border-color: #999999;
-    background: rgba(220,220,220,.65);
-    color: #555555;
-    box-shadow: none;
-    text-shadow: none;
-  }
-
-  .select:disabled:after
-  {
-    content: "";
-  }
-
-  .select.preselected,.select:disabled.preselected
-  {
-    color: black;
-  }
-
-  .leftmenu
-  {
-    padding: 40px 0 0 0;
-    width: 324px;
-  }
-
-  .rightmenu
-  {
-    position: absolute;
-    top: 40px;
-    right: 25px;
-  }
-
-  .activitymenu
-  {
-    position: absolute;
-    left: 325px;
-    top: 40px;
-  }
-
-  .mainmenu
-  {
-    padding: 0 0 30px 0;
-  }
-
-  .battleform
-  {
-    width: 230px;
-    text-align: left;
-    margin: 0 auto;
-  }
-
-  .battleform .buttonbar
-  {
-    text-align: center;
-  }
-
-  .mainmenuwrapper
-  {
-    position: relative;
-    min-height: 100%;
-  }
-
-  .mainmenufooter
-  {
-    position: absolute;
-    bottom: 15px;
-    left: 20px;
-    color: rgb(0,129,255);
-    text-shadow: 0 0 1px black,0 0 1px black,0 0 1px black;
-  }
-
-  .mainmenufooter blockquote
-  {
-    margin: 0 0 1em 0;
-    padding: 0;
-  }
-
-  .mainmenufooter small
-  {
-    font-size: 9pt;
-  }
-
-  .mainmenufooter small:after
-  {
-    content: "Created by xVeNoMiiZz";
-    font-size: 9pt;
-    position: absolute;
-    left: 1px;
-    top: -25px;
-    color: black;
-    text-shadow: 1px 1px 1px rgba(255,255,255,0.4), -1px -1px 1px rgba(255,255,255,0.4), 1px 0 1px rgba(255,255,255,0.4), -1px 0 1px rgba(255,255,255,0.4);
-  }
-
-  .mainmenufooter a
-  {
-    text-decoration: underline;
-    color: rgb(255,30,30);
-    text-shadow: 1px 1px rgba(0,0,0,0.8);
-  }
-
-  .mainmenufooter a:hover
-  {
-    text-decoration: underline;
-    color: rgb(0,0,0);
-    text-shadow: 1px 1px rgba(255,30,30,0.8);
-  }
-
-  .pmbox
-  {
-    width: 270px;
-    margin: 0 auto;
-    min-height: 2px;
-  }
-
-  .pm-window
-  {
-    margin-bottom: 12px;
-  }
-
-  .pm-window h3
-  {
-    background: rgba(0,129,255, 0.8);
-    color: black;
-    margin: 0;
-    padding: 2px 5px;
-    font-size: 11pt;
-    border: 1px solid black;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    cursor: pointer;
-    transition: background 0.4s;
-  }
-
-  .pm-window h3:hover
-  {
-    background: rgba(255,30,30, 0.8);
-    color: black;
-    margin: 0;
-    padding: 2px 5px;
-    font-size: 11pt;
-    border: 1px solid black;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    cursor: pointer;
-  }
-
-  .pm-window h3.pm-minimized
-  {
-    border-radius: 5px;
-  }
-
-  .pm-window h3.pm-notifying
-  {
-    border-color: rgba(255,30,30,0.9);
-    background: rgba(0,0,0,0.8);
-  }
-
-  .pm-window h3.pm-notifying:hover
-  {
-    border-color: rgba(255,0,0,0.9);
-    background: rgba(0,129,255,0.8);
-  }
-
-  .pm-window h3 .closebutton,.pm-window h3 .minimizebutton
-  {
-    float: right;
-    padding-right: 1px;
-  }
-
-  .pm-window h3 small
-  {
-    color: #131313;
-    font-weight: normal;
-    vertical-align: 1px;
-    text-shadow: 1px 1px rgba(255,255,255,0.6);
-  }
-
-  .pm-log
-  {
-    min-height: 100px;
-    max-height: 300px;
-    background: rgba(242,247,250,.925);
-    color: black;
-    word-wrap: break-word;
-    border: 1px solid #AAAAAA;
-    border-top: 0;
-    border-bottom: 0;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-    overflow-scrolling: touch;
-  }
-
-  .pm-log-add
-  {
-    border: 1px solid black;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    background: rgba(0,129,255, 0.8);
-    transition: background 0.4s;
-  }
-
-  .pm-log-add:hover
-  {
-    background-color: rgba(255,30,30, 0.8);
-    border-color: black;
-  }
-
-  .pm-window.collapsed .pm-log,.pm-window.collapsed .pm-log-add
-  {
-    display: none;
-  }
-
-  .pm-window.focused h3,.pm-window.focused .pm-log,.pm-window.focused .pm-log-add
-  {
-    border-color: #555555;
-  }
-
-  .pm-window.focused h3
-  {
-    background: rgba(255, 255, 255, 0.5);
-    color: #0081FF;
-    text-shadow: 1px 1px black;
-    border: 1px solid #0081FF;
-    cursor: url(http://cur.cursors-4u.net/games/gam-13/gam1281.cur), progress !important;
-    transition: background 0.4s, color 0.5s, text-shadow 0.5s;
-  }
-
-  .pm-window.focused h3:hover
-  {
-    background: rgba(0, 0, 0, 0.5);
-    color: #0081FF;
-    text-shadow: 1px 1px 1px rgba(255,255,255,0.4);
-    border: 1px solid #0081FF;
-    cursor: url(http://cur.cursors-4u.net/games/gam-13/gam1281.cur), progress !important;
-  }
-
-  .challenge
-  {
-    margin-top: -1px;
-    background: rgba(255,30,30,0.8);
-    border: 1px solid rgba(0,129,255,0.9);
-    color: white;
-    text-shadow: 1px 1px rgba(0,0,0,0.4);
-    padding: 1px 5px;
-  }
-
-  .challenge p
-  {
-    margin: 4px 0;
-  }
-
-  .tiny-layout .leftmenu,.tiny-layout .rightmenu,.tiny-layout .activitymenu
-  {
-    position: static;
-    top: 0;
-    right: 0;
-    left: 0;
-    width: auto;
-    margin: 0;
-    padding: 0;
-  }
-
-  .tiny-layout .leftmenu
-  {
-    padding-top: 30px;
-  }
-
-  .tiny-layout .activitymenu
-  {
-    padding-bottom: 8px;
-  }
-
-  .mainmessage
-  {
-    display: block;
-    padding: 10px 15px;
-    margin: 30px 40px;
-    max-width: 400px;
-    border-radius: 20px;
-    background: rgba(201,207,219,.8);
-    color: black;
-  }
-
-  .menugroup
-  {
-    display: block;
-    padding: 10px 0;
-    margin: 0 27px 30px 27px;
-    max-width: 400px;
-    border-radius: 20px;
-    background: rgba(201,207,219,.6);
-    color: black;
-    text-shadow: 1px 1px 1px white;
-  }
-
-  .menugroup
-  {
-    background: rgba(201,207,219,.4);
-    text-align: center;
-  }
-
-  .mainmessage p,.menugroup p
-  {
-    margin: 10px 0;
-  }
-
-  .menugroup .button
-  {
-    box-sizing: border-box;
-    font-size: 12pt;
-    font-family: Verdana,Helvetica,Arial,sans-serif;
-    display: inline-block;
-    padding: 5px 7px 3px 7px;
-    width: 200px;
-    outline: none;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    text-shadow: 0 -1px 0 hsl(210,40%,10%);
-    border-radius: 5px;
-    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2),inset 0 1px 1px rgba(255,255,255,.8);
-    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2),inset 0 1px 1px rgba(255,255,255,.8);
-    box-shadow: 0 1px 2px rgba(0,0,0,.2),inset 0 1px 1px rgba(255,255,255,.8);
-    color: #FFFFFF;
-    border: solid 1px #AAAAAA;
-    background: linear-gradient(rgba(0,129,255,0.9), rgba(0,60,230,0.9));
-    border-color: rgba(0,0,0,0.9);
-    transition: border 0s;
-  }
-
-  .menugroup .button:hover
-  {
-    background: linear-gradient(rgba(255,30,30,0.9), rgba(230,0,0,0.9));
-    border-color: rgba(0,129,255,0.9);
-  }
-
-  .menugroup button.big
-  {
-    width: 230px;
-    padding: 6px 7px 6px 7px;
-    font-size: 14pt;
-  }
-
-  .menugroup .button:active
-  {
-    box-shadow: 0 1px 2px rgba(0,0,0,.2),inset 0 1px 1px rgba(255,255,255,.8);
-    background: linear-gradient(rgba(210,20,20,0.9),rgba(200,0,0,0.9));
-    border-color: rgba(0,129,255,0.9);
-  }
-
-  .menugroup .button.disabled,.menugroup .button.disabled:hover,.menugroup .button.disabled:active
-  {
-    cursor: url(http://cur.cursors-4u.net/games/gam-13/gam1281.cur), progress !important;
-    background: #EEEEEE;
-    border: 1px solid #CCCCCC;
-    color: #999999;
-    text-shadow: none;
-    box-shadow: 0 1px 2px rgba(0,0,0,.1);
-  }
-
-  .rightmenu
-  {
-    width: 294px;
-  }
-
-  .rightmenu .menugroup .button
-  {
-    width: 180px;
-  }
-
-  .ladder table,.ladder td,.ladder th
-  {
-    border-collapse: collapse;
-    border: 1px solid rgba(0,0,0,0.9);
-  }
-
-  .ladder td,.ladder th
-  {
-    padding: 3px 5px;
-  }
-
-  .ladder th
-  {
-    text-align: left;
-    font-size: 9pt;
-    background: rgba(0,129,255,0.8);
-  }
-
-  .ladder span
-  {
-    color: gray;
-  }
-
-  .hidden
-  {
-    display: none;
-  }
-
-  .roomlist
-  {
-    text-align: left;
-  }
-
-  .roomlist a.ilink
-  {
-    display: block;
-    margin: 2px 7px 4px 7px;
-    padding: 1px 4px 2px 4px;
-    border: 1px solid rgba(0,129,255,0.9);
-    background: rgba(255,30,30,0.8);
-    border-radius: 4px;
-    text-decoration: none;
-    color: white;
-    text-shadow: 1px 1px rgba(0,0,0,0.6);
-    box-shadow: 1px 1px 1px #D5D5D5;
-    cursor: pointer;
-    font-size: 10pt;
-    overflow: hidden;
-    white-space: nowrap;
-    transition: background 0.5s, border 0.5s;
-  }
-
-  .roomlist a.ilink small
-  {
-    font-size: 8pt;
-  }
-
-  .roomlist a.ilink:hover
-  {
-    border: 1px solid rgba(255,30,30,0.9);
-    background: rgba(0,129,255,0.8);
-    color: white;
-    text-decoration: none;
-  }
-
-  .ps-popup.credits
-  {
-    max-width: 380px;
-    margin-top: 20px;
-    padding: 5px 60px;
-  }
-
-  .credits h2
-  {
-    font-size: 11pt;
-    font-style: italic;
-    margin-bottom: 0;
-    color: #6688AA;
-  }
-
-  .credits ul
-  {
-    padding-left: 1.5em;
-    margin-top: 0;
-    margin-bottom: 0;
-    color: #88AACC;
-  }
-
-  .credits ul li p
-  {
-    color: black;
-  }
-
-  .credits li small
-  {
-    font-size: 10pt;
-    display: block;
-    color: #555555;
-  }
-
+    text-shadow: 1px 1px #F6E26F, 1px -1px #F6E26F, -1px 1px #F6F0C9, -1px -1px #F6E26F;
+  }
+ 
+  /******************
+  * HEADER CSS ~end *
+  ******************/
+  /***********
+  * CHAT CSS *
+  ***********/
+ 
   .chat-log
   {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 40px;
-    font-size: 10pt;
-    background: rgba(242,247,250,.5);
+    background: rgba(255, 255, 240, 0.8) url("http://pldh.net/media/pokemon/gen6/xy-animated/026.gif") top right no-repeat;
+    border-width: 0px 0px 1px 1px;
+    border-style: solid;
+    border-color: #000;
     color: black;
-    word-wrap: break-word;
-    overflow: auto;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
-    overflow-scrolling: touch;
-  }
-
-  .chat-log-add
-  {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    min-height: 36px;
-    padding: 3px 4px 0 4px;
-    border-top: 1px solid #AAAAAA;
-  }
-
-  .chat-log .notice,.chat-log .chat,.pm-log .chat
-  {
-    padding: 4px 0 2px 0;
-    font-size: 9pt;
-  }
-
-  .chat em
-  {
-    padding: 0 4px 0 3px;
-    font-style: normal;
   }
 
   .chat small
   {
-    font-weight: normal;
-    font-size: 8pt;
-    color: #888888;
-  }
-
-  .chat.timer
-  {
-    color: #992222;
-  }
-
-  .debug
-  {
-    display: none;
-  }
-
-  .highlighted
-  {
-    background-color: rgba(0,129,255,0.8);
-  }
-
-  .revealed
-  {
-    background-color: #C8FDEA;
-  }
-
-  .message-pm
-  {
-    color: rgb(255,30,30);
-  }
-
-  .message-pm .pmnote
-  {
-    cursor: pointer;
-  }
-
-  .chat-log .inner,.pm-log .inner
-  {
-    padding: 4px 8px 6px 8px;
-  }
-
-  a.ilink
-  {
-    text-decoration: none;
-    color: #224488;
-  }
-
-  a.ilink:hover
-  {
-    text-decoration: underline;
-    color: #6688CC;
-  }
-
-  .chatbox
-  {
-    margin: 0 10px 0 80px;
-    padding: 5px 0 0 0;
-  }
-
-  .chatbox.nolabel
-  {
-    margin: 0 14px 0 6px;
-    padding: 5px 0 5px 0;
-  }
-
-  .chatbox label
-  {
-    float: left;
-    margin-left: -78px;
-    padding-top: 2px;
-    width: 73px;
-    text-align: right;
-    overflow: hidden;
-    white-space: pre;
-    font-weight: bold;
-    font-size: 8pt;
-  }
-
-  .chatbox textarea
-  {
-    display: block;
-    height: 1.1em;
-    width: 100%;
-    resize: none;
-    font-size: 9pt;
-    font-family: Verdana,Helvetica,Arial,sans-serif;
-  }
-
-  .tournaments-info>ul
-  {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .tournament-wrapper
-  {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2em;
-    line-height: 2em;
-    text-align: center;
-    border-bottom: 1px #aaa solid;
-  }
-
-  .tournament-wrapper.active
-  {
-    display: block;
-  }
-
-  .tournament-wrapper.active+.chat-log
-  {
-    top: 2.4em;
-  }
-
-  .tournament-title
-  {
-    font-weight: bold;
-    cursor: pointer;
-  }
-
-  .tournament-status,.tournament-toggle
-  {
-    position: absolute;
-    top: 0;
-    padding: 0 0.5em;
-    font-weight: normal;
-    font-size: 80%;
-    background-color: rgba(242,247,250,0.85);
-    border-right: 1px #aaa solid;
-  }
-
-  .tournament-status
-  {
-    left: 0;
-  }
-
-  .tournament-toggle
-  {
-    right: 0;
-    border-left: 1px #aaa solid;
-  }
-
-  .tournament-box
-  {
-    position: absolute;
-    top: 2em;
-    left: 0;
-    right: 0;
-    z-index: 1;
-    line-height: 1em;
-    border-bottom: 1px #aaa solid;
-    border-right: 1px #aaa solid;
-    background-color: rgba(242,247,250,0.85);
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.2s ease-in-out;
-    -o-transition: max-height 0.2s ease-in-out;
-    -moz-transition: max-height 0.2s ease-in-out;
-    -webkit-transition: max-height 0.2s ease-in-out;
-  }
-
-  .tournament-bracket
-  {
-    max-height: 200px;
-    padding: 10px;
-    overflow: hidden;
-    font-size: 8pt;
-  }
-
-  .tournament-bracket-overflowing
-  {
-    height: 200px;
-    padding: 0;
-    position: relative;
-    left: 0;
-    top: 0;
-  }
-
-  .tournament-popout-link
-  {
-    position: absolute;
-    bottom: 0.5em;
-    right: 0.5em;
-  }
-
-  .tournament-popout-bracket
-  {
-    max-width: inherit!important;
-    position: relative!important;
-    left: 0;
-    top: 0;
-    overflow: hidden;
-    padding: 0;
-    font-size: 8pt;
-    text-align: center;
-  }
-
-  .tournament-popout-bracket>*[class^='tournament-bracket-']
-  {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-
-  .tournament-popout-bracket>.buttonbar
-  {
-    position: absolute;
-    right: 0.5em;
-    bottom: 0;
-  }
-
-  .tournament-bracket-table
-  {
-    margin: 0 auto;
-    empty-cells: hide;
-    border-bottom: 1px #aaa solid;
-    border-collapse: collapse;
-  }
-
-  .tournament-bracket-table td,.tournament-bracket-table th
-  {
-    border: 1px #aaa solid;
-    padding: 5px;
-  }
-
-  .tournament-bracket-table td
-  {
-    white-space: nowrap;
-  }
-
-  .tournament-bracket-table .empty,.tournament-bracket-table .tournament-bracket-table-cell-null
-  {
-    border-width: 0;
-  }
-
-  .tournament-bracket-table-cell-result-win
-  {
-    background-color: rgba(0,255,0,0.2);
-  }
-
-  .tournament-bracket-table-cell-result-draw
-  {
-    background-color: rgba(255,255,0,0.2);
-  }
-
-  .tournament-bracket-table-cell-result-loss
-  {
-    background-color: rgba(255,0,0,0.2);
-  }
-
-  .tournament-bracket-tree-link
-  {
-    fill: none;
-    stroke: #aaa;
-  }
-
-  .tournament-bracket-tree-link-active
-  {
-    stroke: #aa0;
-    stroke-width: 3px;
-  }
-
-  .tournament-bracket-tree-node>rect
-  {
-    fill: rgba(225,232,242,0.7);
-    stroke: rgba(178,183,191,0.7);
-  }
-
-  .tournament-bracket-tree-node-win>rect
-  {
-    fill: rgba(0,255,0,0.2);
-    stroke: rgba(0,255,0,0.5);
-  }
-
-  .tournament-bracket-tree-node-draw>rect
-  {
-    fill: rgba(255,255,0,0.2);
-    stroke: rgba(255,255,0,0.5);
-  }
-
-  .tournament-bracket-tree-node-loss>rect
-  {
-    fill: rgba(255,0,0,0.2);
-    stroke: rgba(255,0,0,0.5);
-  }
-
-  .tournament-bracket-tree-node>text
-  {
-    font-size: 0.8em;
-    text-anchor: middle;
-    dominant-baseline: central;
-  }
-
-  .tournament-bracket-tree-node>text>a
-  {
-    fill: #248;
-  }
-
-  .tournament-bracket-tree-node>text>a:hover
-  {
-    fill: #68c;
-  }
-
-  .tournament-bracket-tree-node-match-team
-  {
-    font-weight: bold;
-  }
-
-  .tournament-bracket-tree-node-match-team-draw,.tournament-bracket-tree-node-match-team-loss
-  {
-    fill: #aaa;
-  }
-
-  .tournament-tools
-  {
-    padding: 10px;
-    display: none;
-    border-top: 1px #aaa solid;
-  }
-
-  .tournament-tools.active
-  {
-    display: block;
-  }
-
-  .tournament-join,.tournament-leave
-  {
-    display: none;
-  }
-
-  .tournament-join.active,.tournament-leave.active
-  {
-    display: inline;
-  }
-
-  .tournament-nomatches,.tournament-challenge,.tournament-challengeby,.tournament-challenging,.tournament-challenged
-  {
-    display: none;
-  }
-
-  .tournament-nomatches.active,.tournament-challenge.active,.tournament-challengeby.active,.tournament-challenging.active,.tournament-challenged.active
-  {
-    display: block;
-  }
-
-  div[class^='tournament-message-'],div[class*=' tournament-message-']
-  {
-    font-weight: bold;
-  }
-
-  .tournament-message-end-bracket
-  {
-    font-weight: normal!important;
-    max-height: 400px;
-    overflow: hidden;
-    text-align: center;
-  }
-
-  .tournament-message-end-bracket-overflowing
-  {
-    height: 400px;
-    position: relative;
-    left: 0;
-    top: 0;
-  }
-
-  .message-announce
-  {
-    background: #6688AA;
-    color: white;
-    padding: 1px 4px 2px;
-  }
-
-  .message-announce a,.broadcast-green a,.broadcast-blue a,.broadcast-red a
-  {
-    color: #DDEEFF;
-  }
-
-  .broadcast-green
-  {
-    background-color: #559955;
-    color: white;
-    padding: 2px 4px;
-  }
-
-  .broadcast-blue
-  {
-    background-color: #6688AA;
-    color: white;
-    padding: 2px 4px;
+    color: #000;
   }
 
   .infobox
   {
-    border: 1px solid #6688AA;
-    padding: 2px 4px;
+    background: transparent;
+    border-color: #000;
+    border-style: outset;
+    padding: 8px;
   }
 
-  .broadcast-red
+  .infobox code
   {
-    background-color: #AA5544;
-    color: white;
-    padding: 2px 4px;
+    color: #000000;
   }
 
-  .message-learn-canlearn
+  .message small
   {
-    font-weight: bold;
-    color: #228822;
-    text-decoration: underline;
+    color: #000 !important;
   }
 
-  .message-learn-cannotlearn
+  .message .utilichart .result
   {
-    font-weight: bold;
-    color: #CC2222;
-    text-decoration: underline;
+    border: 1px outset #000;
+    background: rgba(255, 161, 97, 0.7);
   }
 
-  .message-effect-weak
+  .chat-log a.ilink
   {
-    font-weight: bold;
-    color: #CC2222;
+    color: #000000;
   }
 
-  .message-effect-resist
+  .chat-log a.ilink:hover
   {
-    font-weight: bold;
-    color: #6688AA;
+    color: #000000;
   }
 
-  .message-effect-immune
+  .infobox a.ilink
   {
-    font-weight: bold;
-    color: #666666;
+    color: orange;
   }
 
-  .message-learn-list
+  .infobox a.ilink:hover
   {
-    margin-top: 0;
-    margin-bottom: 0;
+    color: #000000;
   }
 
-  .message-throttle-notice
+  .chat.mine
   {
-    color: red;
+    background: transparent;
+  }
+
+  .message-pm
+  {
+    color: #000;
+  }
+
+  .chat-log-add
+  {
+    background: rgba(250, 240, 199, 0.5);
+    border-color: rgba(241, 231, 194, 0);
+  }
+
+  .chat-log-add .chatbox label
+  {
+    text-shadow: 0px 0px 2px #000;
   }
 
   .userlist
   {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 145px;
-    border-right: 1px solid #AAAAAA;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-    overflow-scrolling: touch;
-  }
-
-  .chat-log.hasuserlist,.chat-log-add.hasuserlist,.tournament-wrapper.hasuserlist
-  {
-    left: 146px;
-  }
-
-  .userlist,.userlist li
-  {
-    display: block;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    text-align: left;
+    background: rgba(255,238,214, 0.7);
+    border-color: rgba(241, 231, 194, 0);
   }
 
   .userlist li
   {
-    border-bottom: 1px solid #CCCCCC;
-    height: 19px;
-    font: 10pt Verdana,sans-serif;
-    white-space: nowrap;
+    border-color: #000;
   }
 
-  .userlist li em.group
+  .userlist li span, .userlist li strong
   {
-    font-style: normal;
-    font-size: 8pt;
-    color: #AAAAAA;
-    display: block;
-    float: left;
-    text-align: center;
-    padding: 1px 0 0 1px;
-    width: 14px;
-  }
-
-  .userlist li button
-  {
-    box-sizing: border-box;
-    display: block;
-    height: auto;
-    background: transparent;
-    border: 0;
-    padding: 1px 0;
-    margin: 0;
-    height: 19px;
-    width: 100%;
-    white-space: nowrap;
-    font: 9pt Verdana,sans-serif;
-    text-align: left;
-    cursor: pointer;
-    text-shadow: 1px 1px 1px rgba(0,0,0,0.4);
-    transition: background 0.5s;
+    text-shadow: none;
   }
 
   .userlist li button:hover
   {
-    background: rgba(0,0,0,0.1);
-    border-radius: none;
+    background: rgba(255, 255, 255, 0.5);
   }
 
-  .userlist li button:active
+  .userlist-count
   {
-    background: #ccd4dc;
+    color: #000;
   }
 
-  .userlist li.cur
+  .userlist li em.group
   {
-    background: white;
+    color: #000;
+  }
+ 
+  /****************
+  * CHAT CSS ~end *
+  ****************/
+    /**********************
+  * MAINMENUWRAPPER CSS *
+  **********************/
+ 
+  .menugroup
+  {
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px outset #000;
+    color: black;
   }
 
-  .userlist li.cur button,.userlist li.cur button:hover
+  .menugroup button, .select, .menugroup .button.mainmenu2, .menugroup .button.mainmenu4
   {
-    background: white;
-    margin: 0 0 0 -1px;
+    background: #FFE278;
+    padding: 3px 8px;
+    border: 1px outset #000;
+    color: #000;
   }
 
-  .ps-room .battle-log
+  .menugroup button:hover, .select:hover, .menugroup .button.mainmenu2:hover, .menugroup .button.mainmenu4:hover
   {
-    position: absolute;
-    top: 0;
-    left: 640px;
-    right: 0;
-    bottom: 40px;
-    height: auto;
-    width: auto;
-    word-wrap: break-word;
-    border-right: 0;
-    border-top: 0;
-    border-bottom: 0;
+    background: #FFFF8B;
+    border-color: #000;
   }
 
-  .ps-room .battle-log-add
+  .menugroup a.ilink
   {
-    position: absolute;
-    bottom: 0;
-    left: 640px;
-    right: 0;
-    top: auto;
-    min-height: 36px;
-    height: auto;
-    width: auto;
-    padding: 3px 4px 0 4px;
-    border-right: 0;
-    border-bottom: 0;
-  }
-
-  .ps-room .battle
-  {
-    border-top: 0;
-    border-left: 0;
-    border-right: 0;
-    top: 0;
-    left: 0;
-  }
-
-  .ps-room .battle-controls
-  {
-    position: absolute;
-    top: 370px;
-    left: 0;
-    width: 640px;
-  }
-
-  .battle-controls p
-  {
-    margin: 2px 0 8px 0;
-    padding: 0 8px;
-  }
-
-  .battle-controls .whatdo
-  {
-    margin-top: -2px;
-    padding: 0 8px;
-    font-size: 9pt;
-    color: #555555;
-  }
-
-  .battle-controls .whatdo small
-  {
-    float: right;
-    padding: 1px 2px;
-    border: 1px solid #999999;
-    border-radius: 4px;
-  }
-
-  .battle-controls .whatdo small.weak
-  {
-    color: #AAAA22;
-    border-color: #AAAA22;
-  }
-
-  .battle-controls .whatdo small.critical
-  {
-    color: #EE4433;
-    border-color: #EE4433;
-  }
-
-  .shiftselect button,.moveselect button,.switchselect button
-  {
-    background: transparent;
-    border: 0;
     font-weight: bold;
     font-style: italic;
-    color: #555555;
+  }
+
+  .menugroup a.ilink:hover
+  {
+    background: #FFA041;
+  }
+
+  .select:disabled, .select:disabled:hover
+  {
+    background: #FFFF8B;
+    border: 1px solid #000;
+  }
+
+  .teamselect:disabled strong
+  {
+    color: #000;
+  }
+
+  .menugroup .button.mainmenu1, .menugroup .button.mainmenu3, .menugroup .button.mainmenu5
+  {
+    background: #FFFF7D;
+    border-color: #000;
+    color: #000;
+  }
+
+  .menugroup .button.mainmenu1:hover, .menugroup .button.mainmenu3:hover, .menugroup .button.mainmenu5:hover
+  {
+    background: #FFA071;
+    border-color: #000;
+  }
+
+  .pm-window h3
+  {
+    background: #FFFF7D;
+    border: 1px outset #000;
+    color: #000;
+  }
+
+  .pm-window .closebutton, .pm-window .minimizebutton
+  {
+    color: #000;
+  }
+
+  .pm-window h3 small
+  {
+    color: #FFA045;
+  }
+
+  .pm-window h3:hover
+  {
+    background: #FFFF7D;
+    border: 1px outset #00000;
+    color: #000;
+  }
+
+  .pm-window .closebutton:hover, .pm-window .minimizebutton:hover, .pm-window h3:hover .minimizebutton
+  {
+    color: #000;
+  }
+
+  .pm-window .closebutton:hover + .minimizebutton
+  {
+    color: #000 !important;
+  }
+
+  .pm-window.focused h3, .pm-window.focused h3:hover
+  {
+    background: #FFFF8B;
+    border: 1px outset #000;
+    color: #000;
+  }
+
+  .pm-log, .pm-window.focused .pm-log
+  {
+    background: #FFE493;
+    border-color: #000;
+    color: black;
+  }
+
+  .unread
+  {
+    background: none;
+  }
+
+  .challenge
+  {
+    background: #FFFF8B;
+    border: 1px outset #000;
+    color: #000;
+  }
+
+  .challenge .buttonbar button
+  {
+    background: #FFFF8B;
+    padding: 3px 8px;
+    border: 1px outset #000;
+    color: #000;
+  }
+
+  .challenge .buttonbar button:hover
+  {
+    background: #FFA041;
+    border-color: #000;
+  }
+
+  .pm-log-add, .pm-window.focused .pm-log-add
+  {
+    background: #FFFF8B;
+    border: 1px outset #000;
+    color: #000;
+  }
+
+  .pm-log-add .textbox
+  {
+    border-color: #000;
+  }
+
+  .mainmenufooter
+  {
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px outset #000;
+    padding: 5px;
+    color: #000;
+  }
+
+  .mainmenufooter a
+  {
+    color: #FFA045;
+  }
+
+  .mainmenufooter a:hover
+  {
+    color: #FFFF8B;
+  }
+ 
+  /***************************
+  * MAINMENUWRAPPER CSS ~end *
+  ***************************/ 
+  /******************
+  * TOURNAMENTS CSS *
+  ******************/
+ 
+  .tournament-title
+  {
+    background: rgba(255, 245, 190, 0.7);
+    color: #000;
+  }
+
+  .tournament-status, .tournament-toggle
+  {
+    background: rgb(255, 245, 130);
+    border-color: #000;
+    color: #000;
+  }
+
+  .tournament-status
+  {
+    border-left: 1px solid #000;
+  }
+
+  .tournament-box
+  {
+    border-color: #000;
+    border-left: 1px solid #000;
+  }
+
+  .tournament-bracket
+  {
+    background: url("http://pldh.net/media/pokemon/gen6/xy-animated/026.gif") center left no-repeat;
+    border-color: #000;
+  }
+
+  .tournament-bracket-tree
+  {
+    padding: 15px 0px;
+  }
+
+  .tournament-tools
+  {
+    background: rgba(247, 219, 177, 0.7);
+    border-color: #000;
+  }
+
+  .tournament-tools .button
+  {
+    background: #B5D2B8;
+    border-color: #49614B;
+    color: #49614B;
+    text-shadow: 0px 0px 2px #C5E2C8;
+  }
+
+  .tournament-tools .button:hover
+  {
+    background: rgba(255,218,130,0.7);
+    border-color: #000;
+  }
+
+  .tournament-tools .select:disabled, .tournament-tools .select:disabled:hover
+  {
+    background: #B5D2B8;
+    border-color: #000;
+    color: #000;
+  }
+
+  .tournament-tools .teamselect:disabled strong
+  {
+    color: #49614B;
+  }
+
+  .tournament-tools .select
+  {
+    background: rgba(255, 223, 184, 0.7);
+    border-color: #000;
+    color: #000;
+  }
+
+  .tournament-tools .select:hover
+  {
+    background: rgba(255, 223, 175, 0.7);
+  }
+
+  .tournament-format
+  {
+    color: #000;
     font-size: 12pt;
-    display: block;
-    margin: 0;
-    padding: 9px 7px 1px 7px;
   }
 
-  .shiftselect button
+  .ps-popup.tournament-popout-bracket
   {
-    color: #445588;
-    cursor: pointer;
+    background-image: url("https://images5.alphacoders.com/613/613927.jpg");
   }
-
-  .moveselect button
-  {
-    color: #884422;
-    cursor: url(http://cur.cursors-4u.net/games/gam-13/gam1281.cur), progress !important;
-  }
-
-  .switchselect button
-  {
-    color: #445588;
-    cursor: default;
-  }
-
-  .switchmenu button
-  {
-    position: relative;
-    display: block;
-    float: left;
-    width: 100px;
-    margin-right: 6px;
-    font: 9pt Verdana,sans-serif;
-    padding: 5px 5px 5px 0;
-    white-space: pre;
-    overflow: hidden;
-  }
-
-  .switchmenu button .pokemonicon
-  {
-    float: left;
-    margin: -4px 0;
-    opacity: 0.8;
-  }
-
-  .switchmenu button .hpbar
-  {
-    position: absolute;
-    display: block;
-    border: 1px solid #AAA;
-    background: #EEE;
-    height: 2px;
-    bottom: 2px;
-    left: 2px;
-    right: 2px;
-    border-radius: 2px;
-    opacity: .6;
-  }
-
-  .switchmenu button .hpbar span
-  {
-    display: block;
-    height: 1px;
-    background: #0A6;
-    border-top: 1px solid #3C0;
-    border-radius: 1px;
-  }
-
-  .switchmenu button .hpbar-yellow span
-  {
-    border-top-color: #a5aa53;
-    background-color: #a2a822;
-  }
-
-  .switchmenu button .hpbar-red span
-  {
-    border-top-color: #faa;
-    background-color: #f55;
-  }
-
-  .switchmenu button .status
-  {
-    position: absolute;
-    display: block;
-    right: 2px;
-    bottom: 1px;
-    width: 5px;
-    height: 5px;
-    padding: 0;
-    border-radius: 2px;
-    border: 1px solid #C2C2C2;
-    opacity: 1.0;
-  }
-
-  .status
-  {
-    color: white;
-    border-radius: 3px;
-    padding: 0 2px;
-  }
-
-  .status.brn
-  {
-    background: #EE5533;
-  }
-
-  .status.psn,.status.tox
-  {
-    background: #A4009A;
-  }
-
-  .status.par
-  {
-    background: #9AA400;
-  }
-
-  .status.slp
-  {
-    background: #AA77AA;
-  }
-
-  .status.frz
-  {
-    background: #009AA4;
-  }
-
-  .movemenu button
-  {
-    float: left;
-    display: block;
-    width: 153px;
-    margin-right: 6px;
-    height: 40px;
-    font: 10pt/100% Verdana,sans-serif;
-    position: relative;
-    padding: 6px 4px 0 4px;
-  }
-
-  .movemenu button small
-  {
-    color: #777777;
-  }
-
-  .movemenu button small.type
-  {
-    padding-top: 3px;
-    float: left;
-    font-size: 7pt;
-  }
-
-  .movemenu button small.pp
-  {
-    padding-top: 3px;
-    float: right;
-    font-size: 7pt;
-  }
-
-  .switchmenu,.movemenu
-  {
-    display: block;
-    margin-right: -10px;
-    padding-left: 5px;
-  }
-
-  .switchmenu button,.movemenu button
-  {
-    position: relative;
-    outline: none;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    text-shadow: 0 1px 0 rgba(255,255,255,.4);
-    border-radius: 5px;
-    margin-top: 2px;
-    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2),inset 0 -1px 2px rgba(255,255,255,1);
-    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2),inset 0 -1px 2px rgba(255,255,255,1);
-    box-shadow: 0 1px 2px rgba(0,0,0,.2),inset 0 -1px 2px rgba(255,255,255,1);
-    color: #111111;
-    border: solid 1px #AAAAAA;
-    background: #e3e3e3;
-    background: -webkit-gradient(linear,left top,left bottom,from(#f6f6f6),to(#e3e3e3));
-    background: -moz-linear-gradient(top,#f6f6f6,#e3e3e3);
-    background: linear-gradient(top,#f6f6f6,#e3e3e3);
-  }
-
-  .switchmenu button:hover,.movemenu button:hover
-  {
-    background: #cfcfcf;
-    background: -webkit-gradient(linear,left top,left bottom,from(#f2f2f2),to(#cfcfcf));
-    background: -moz-linear-gradient(top,#f2f2f2,#cfcfcf);
-    background: linear-gradient(top,#f2f2f2,#cfcfcf);
-    border-color: #606060;
-  }
-
-  .switchmenu button:active,.movemenu button:active
-  {
-    background: -webkit-gradient(linear,left top,left bottom,from(#cfcfcf),to(#f2f2f2));
-    background: -moz-linear-gradient(top,#cfcfcf,#f2f2f2);
-    background: linear-gradient(top,#cfcfcf,#f2f2f2);
-  }
-
-  .switchmenu button.disabled,.switchmenu button:disabled,.movemenu button:disabled
-  {
-    cursor: url(http://cur.cursors-4u.net/games/gam-13/gam1281.cur), progress !important;
-    background: #F3F3F3!important;
-    border-color: #CCCCCC!important;
-    -webkit-box-shadow: none!important;
-    -moz-box-shadow: none!important;
-    box-shadow: none!important;
-    color: #777777!important;
-  }
-
-  #tooltipwrapper
-  {
-    position: absolute;
-    top: 400px;
-    left: 100px;
-    text-align: left;
-    color: black;
-  }
-
-  #tooltipwrapper .tooltipinner
-  {
-    position: relative;
-  }
-
-  #tooltipwrapper .tooltip
-  {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 300px;
-    border: 1px solid #888888;
-    background: #EEEEEE;
-    background: rgba(240,240,240,.9);
-    border-radius: 5px;
-  }
-
-  #tooltipwrapper .tooltip h2
-  {
-    padding: 2px 4px;
-    margin: 0;
-    border-bottom: 1px solid #888888;
-    font-size: 10pt;
-  }
-
-  #tooltipwrapper .tooltip h2 small
-  {
-    font-weight: normal;
-  }
-
-  #tooltipwrapper .tooltip p
-  {
-    padding: 2px 4px;
-    margin: 0;
-    font-size: 8pt;
-  }
-
-  #tooltipwrapper .tooltip p.section
-  {
-    border-top: 1px solid #888888;
-  }
-
-  .teamedit
-  {
-    position: absolute;
-    display: block;
-    top: 45px;
-    left: 10px;
-    right: 10px;
-    bottom: 10px;
-    width: auto;
-    height: auto;
-    text-align: left;
-    font-size: inherit;
-    font-family: inherit;
-  }
-
-  .teambar
-  {
-    position: absolute;
-    top: 0;
-    left: 92px;
-  }
-
-  .teambar button
-  {
-    display: block;
-    background: rgba(0,0,0,0.9);
-    color: white;
-    border: 1px solid #0081ff;
-    padding: 0;
-    margin: -1px 2px 0 0;
-    height: 42px;
-    float: left;
-    width: 88px;
-    cursor: pointer;
-    white-space: pre;
-    font-size: 8pt;
-    font-family: Verdana,Arial,sans-serif;
-  }
-
-  .teambar button .pokemonicon
-  {
-    margin: 0 auto;
-  }
-
-  .teambar button:hover
-  {
-    background: rgba(255,255,255,0.75);
-    border-color: rgba(0,129,255,0.9);
-    color: black;
-    text-shadow: 1px 1px rgba(0,129,255,0.5);
-  }
-
-  .teambar button:active
-  {
-    background: #CCCCCC;
-    border-color: #0081ff;
-  }
-
-  .teambar button:disabled,.teambar button:disabled:hover,.teambar button:disabled:active
-  {
-    color: #000000;
-    background: #FCFCFC;
-    border-color: #AAAAAA;
-    opacity: .5;
-    cursor: url(http://cur.cursors-4u.net/games/gam-13/gam1281.cur), progress !important;
-  }
-
-  .teamchart,.teamchart li
-  {
-    list-style-type: none;
-    display: block;
-    margin: 0;
-    padding: 0;
-  }
-
-  .teamchart
-  {
-    padding: 0 10px 10px 10px;
-  }
-
-  .teamchart li
-  {
-    padding-top: 20px;
-    position: relative;
-  }
-
-  .teamchart li.format-select
-  {
-    padding: 4px 0 10px;
-  }
-
-  .teamchart li.format-select label
-  {
-    display: block;
-    font-size: 8pt;
-    font-weight: bold;
-  }
-
-  .teamchart li.format-select select,.teamchart li.format-select option
-  {
-    font: 12pt Verdana,sans-serif;
-  }
-
-  .majorbutton
-  {
-    font-size: 14pt;
-  }
-
-  .setmenu
-  {
-    position: absolute;
-    top: 5px;
-    left: 130px;
-    width: 503px;
-    text-align: right;
-  }
-
-  .setmenu button
-  {
-    cursor: pointer;
-    background: transparent;
-    border: 0;
-    border-radius: 4px;
-    padding: 3px 6px;
-    color: black;
-  }
-
-  .setmenu button:hover
-  {
-    padding: 3px 6px;
-    text-shadow: 1px 1px rgba(255,30,30,0.7);
-    background: transparent;
-    border: none;
-  }
-
-  .setmenu-left
-  {
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    text-align: left;
-  }
-
-  .setchart-nickname
-  {
-    position: absolute;
-    left: -5px;
-    top: 5px;
-    border: 1px solid rgba(255,30,30,0.9);
-    background: rgba(0,129,255,0.8);
-    border-radius: 5px;
-    padding: 1px 0 0 0;
-    width: 110px;
-    box-shadow: inset 1px 1px 0 rgba(255,255,255,.6);
-  }
-
-  .setchart
-  {
-    border: 1px solid rgba(0,129,255,0.9);
-    background: linear-gradient(rgba(255,30,30,0.8), rgba(230,0,0,0.8));
-    border-radius: 5px;
-    padding: 2px 0 0 3px;
-    height: 127px;
-    width: 626px;
-    margin-top: 8px;
-    box-shadow: inset 1px 1px 0 rgba(255,255,255,.6);
-  }
-
-  .setcol
-  {
-    height: 127px;
-    width: 112px;
-    float: left;
-  }
-
-  .setcol-icon
-  {
-    background: transparent none no-repeat scroll center top;
-  }
-
-  .setcol-details
-  {
-    width: 234px;
-  }
-
-  .setcell
-  {
-    float: left;
-  }
-
-  .setcell-details
+ 
+  /**********************
+  * TOURNAMENT CSS ~end *
+  **********************/
+   /************
+  * POPUP CSS *
+  ************/
+ 
+  .ps-popup
   {
-    float: none;
+    background: rgba(255,245,190, 0.7);
+    border: 1px solid #000;
+    color: #000;
   }
 
-  .setcol-icon .itemicon
+  .ps-popup .buttonbar button
   {
-    display: block;
-    margin-left: 88px;
-    margin-top: 60px;
-    width: 24px;
-    height: 24px;
-    background-image: transparent none no-repeat scroll center center;
-    opacity: 0.8;
+    background: #B5D2B8;
+    padding: 3px 8px;
+    border: 1px solid #000;
+    color: #000;
   }
 
-  .setcell-pokemon
+  .ps-popup .buttonbar button:hover
   {
-    margin-top: 0;
+    background: rgba(255,218,130,0.7);
+    border-color: #000;
   }
 
-  .setcell-details
+  .ps-popup a, .ps-popup a.ilink, .popupmenu h3
   {
-    height: 84px;
+    color: #000;
   }
 
-  .setcol-moves .setcell
+  .ps-popup a:hover, .ps-popup a.ilink:hover
   {
-    padding-bottom: 1px;
+    color: #000;
   }
 
-  .setchart label,.setchart-nickname label
+  .ps-popup a.ilink.yours
   {
-    display: block;
-    font-size: 8pt;
-    font-weight: bold;
-    color: black;
-    padding-left: 2px;
-    text-shadow: 1px 1px rgba(255,255,255,0.3);
+    color: #000;
   }
 
-  .setchart-nickname label
+  .popupmenu button.sel
   {
-    font-size: 7pt;
-    margin-bottom: -1px;
+    border-color: #000;
   }
 
-  .setcol-moves
+  .popupmenu button.sel:hover
   {
-    width: 137px;
+    background: rgba(255, 255, 255, 0.2);
+    border-color: #000;
   }
 
-  .setcol-stats
+  .popupmenu button:hover
   {
-    width: 142px;
+    background: rgba(255, 255, 255, 0.4);
+    border-color: #000;
   }
-
-  .setdetails,.setstats
+ 
+  /*****************
+  * POPUP CSS ~end *
+  *****************/
+  /*******************
+   * Team Builder CSS *
+   *******************/
+  .folderpane
   {
-    display: block;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    border: 1px solid #AAAAAA;
-    border-radius: 3px;
-    padding: 1px;
-    margin: 2px 2px 1px 1px;
-    font-size: 7pt;
-    cursor: pointer;
-    box-shadow: inset 0px 1px 2px #CCCCCC,1px 1px 0 rgba(255,255,255,.6);
-    background: #F8FBFD;
-    color: black;
+    border-color: #000;
   }
 
-  .setdetails label,.setstats label
+  .folder.cur .selectFolder, .folder.cur .selectFolder:hover, .folder.cur .selectFolder:active, .folderpane h3, .folderlistafter::before, .folderlistbefore::before, .folder .selectFolder, .folderlist .foldersep::before
   {
-    cursor: pointer;
+    border-color: #000;
   }
 
-  .setdetails:hover,.setstats:hover
+  .folderpane h3
   {
-    border-color: #474747;
-    box-shadow: inset 0px 1px 2px #D2D2D2,1px 1px 0 rgba(255,255,255,.6);
-    background: #FFFFFF;
-    color: black;
+    background: #FFF2A0;
+    color: #000;
   }
 
-  .setdetails:focus,.setstats:focus
+  .folder .selectFolder
   {
-    border: 2px solid black;
-    margin: 1px 1px 0 0;
-    outline: 0 none;
+    background: #FFF2A0;
+    color: #000;
   }
 
-  .setdetails:active,.setstats:active
+  .folderlistafter::before, .folderlist .foldersep::before, .folderlistbefore::before
   {
-    box-shadow: inset 0px 2px 2px #AAAAAA;
-    background: #E4E9ED;
-    border: 2px solid black;
-    margin: 1px 1px 0 0;
-    outline: 0 none;
+    background: #FFF2A0 !important;
   }
 
-  .setdetails
+  .folder .selectFolder:hover
   {
-    width: 230px;
-    height: 34px;
+    background: #FFDE93;
   }
 
-  .setdetails:focus,.setdetails:active
+  .teamlist .team
   {
-    width: 232px;
-    height: 36px;
+    background: #FFE174;
+    padding: 3px 8px;
+    border: 1px solid #000;
+    color: #49614B;
   }
 
-  .setdetails .detailcell
+  .teamlist .team small
   {
-    border-left: 1px solid #CCCCCC;
-    padding: 2px 4px;
-    display: block;
-    float: left;
-    font-size: 9pt;
-    text-align: center;
     text-shadow: none;
   }
 
-  .setdetails .detailcell-first
+  .teamlist .team:hover
   {
-    border-left: 0;
+    background: #FFE198;
+    border-color: #000;
   }
 
-  .setchart .setdetails label
+  .button.big, .format-select .button
   {
-    float: none;
-    display: block;
-    font-weight: normal;
-    font-size: 7pt;
-    text-align: center;
-    padding: 0;
-    text-shadow: none;
+    background: #FFD565;
+    border-color: #000;
+    color: #000;
   }
 
-  .setstats
+  .button.big:hover, .format-select .button:hover
   {
-    width: 138px;
-    height: 108px;
-  }
-
-  .setstats:focus,.setstats:active
-  {
-    width: 140px;
-    height: 110px;
-  }
-
-  .statrow
-  {
-    display: block;
-    height: 15px;
-  }
-
-  .setchart .setstats label
-  {
-    float: left;
-    width: 20px;
-    height: 5px;
-    text-align: right;
-    font-weight: normal;
-    font-size: 7pt;
-    padding: 0;
-  }
-
-  .setstats .statgraph
-  {
-    float: left;
-    width: 75px;
-    padding: 0 0 0 3px;
-    height: 5px;
-  }
-
-  .setstats .statgraph span
-  {
-    display: block;
-    margin-top: 3px;
-    height: 6px;
-    background: #CCCCCC;
-  }
-
-  .setstats em
-  {
-    float: left;
-    font-style: normal;
-    width: 22px;
-    height: 5px;
-    text-align: right;
-  }
-
-  .setstats small
-  {
-    float: left;
-    font-size: 7pt;
-  }
-
-  .setstats .statrow-head em
-  {
-    color: #555555;
-  }
-
-  .teamnameedit
-  {
-    width: 300px;
-  }
-
-  .label
-  {
-    font-size: 9pt;
-    font-weight: bold;
-    display: block;
-  }
-
-  .optlabel
-  {
-    font-size: 9pt;
-    display: block;
-  }
-
-  .label .textbox
-  {
-    display: block;
-  }
-
-  .setchart input,.setchart-nickname input,.statform input.inputform
-  {
-    display: block;
-    border: 1px solid #AAAAAA;
-    border-radius: 3px;
-    padding: 1px;
-    margin: 2px 3px 1px 1px;
-    font-family: Verdana,sans-serif;
-    font-size: 9pt;
-    width: 104px;
-    height: 20px;
-    box-shadow: inset 0px 1px 2px #CCCCCC,1px 1px 0 rgba(255,255,255,.6);
-    background: #F8FBFD;
-    color: black;
-  }
-
-  .setchart input:hover,.setchart-nickname input:hover,.statform input.inputform:hover,.textbox:hover
-  {
-    border-color: #474747;
-    box-shadow: inset 0px 1px 2px #D2D2D2,1px 1px 0 rgba(255,255,255,.6);
-    background: #FFFFFF;
-  }
-
-  .setchart input:focus,.setchart-nickname input:focus,.statform input.inputform:focus,.textbox:focus
-  {
-    outline: 0 none;
-    border: 1px solid #004488;
-    box-shadow: inset 0px 1px 2px #D2D2D2,0px 0px 5px #2266AA;
-    background: #FFFFFF;
-  }
-
-  .setchart input.incomplete
-  {
-    color: #CC3311;
-    border-color: #CC3311;
-  }
-
-  .setchart-nickname input
-  {
-  }
-
-  .setchart .setcell-details input
-  {
-    width: 216px;
-  }
-
-  .setchart .setcell-item input
-  {
-    width: 114px;
-  }
-
-  .setchart .setcol-moves input
-  {
-    width: 129px;
-  }
-
-  .teambuilder-clipboard-container
-  {
-    height: 52px;
-    max-width: 640px;
-    font-size: 8pt;
-    padding: 4px;
-    position: relative;
-    border: 1px solid #FFAA00;
-    border-radius: 5px;
-  }
-
-  .teambuilder-clipboard-title
-  {
-    width: 74px;
-    padding-top: 8px;
-    font-weight: bold;
-    position: absolute;
-    top: 4px;
-    left: 8px;
-  }
-
-  .teambuilder-clipboard-data
-  {
-    display: block;
-    width: 520px;
-    height: 26px;
-    overflow: hidden;
-    cursor: pointer;
-    border: 1px solid #999999;
-    border-radius: 5px;
-    background-image: linear-gradient(top,rgb(218,229,240) 10%,rgb(203,214,225) 55%);
-    background-image: -o-linear-gradient(top,rgb(218,229,240) 10%,rgb(203,214,225) 55%);
-    background-image: -moz-linear-gradient(top,rgb(218,229,240) 10%,rgb(203,214,225) 55%);
-    background-image: -webkit-linear-gradient(top,rgb(218,229,240) 10%,rgb(203,214,225) 55%);
-    background-image: -ms-linear-gradient(top,rgb(218,229,240) 10%,rgb(203,214,225) 55%);
-    outline: none;
-    position: absolute;
-    top: 4px;
-    right: 8px;
-    z-index: 2;
-  }
-
-  .teambuilder-clipboard-data:hover
-  {
-    border: 1px solid #BBBBBB;
-  }
-
-  .teambuilder-clipboard-data .result
-  {
-    height: 26px;
-  }
-
-  .teambuilder-clipboard-data span
-  {
-    display: block;
-    height: 24px;
-    float: left;
-  }
-
-  .teambuilder-clipboard-data .icon
-  {
-    width: 32px;
-  }
-
-  .teambuilder-clipboard-data .species
-  {
-    width: 118px;
-    padding-top: 6px;
-    margin-left: 4px;
-  }
-
-  .teambuilder-clipboard-data .ability-item
-  {
-    width: 98px;
-    padding-left: 2px;
-    margin-top: -1px;
-  }
-
-  .teambuilder-clipboard-data .moves
-  {
-    width: 126px;
-    padding-left: 2px;
-    margin-top: -1px;
-  }
-
-  .teambuilder-clipboard-data .section
-  {
-    height: 100%;
-    padding: 1px;
-    border-right: 1px solid #999999;
-    float: left;
-  }
-
-  .teambuilder-clipboard-data .section.no-border
-  {
-    border: none;
-  }
-
-  .teambuilder-clipboard-buttons
-  {
-    display: block;
-    width: 520px;
-    position: absolute;
-    top: 34px;
-    right: 8px;
-  }
-
-  .teambuilder-clipboard-button-left
-  {
-    float: left;
-    height: 22px;
-  }
-
-  .teambuilder-clipboard-button-right
-  {
-    float: right;
-    height: 22px;
-  }
-
-  .teambuilder-results
-  {
-    position: absolute;
-    top: 200px;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
-    overflow-scrolling: touch;
+    background: #FFD294;
+    border-color: #000;
   }
 
   .teamchartbox
   {
+    background: rgba(255, 255, 116, 0.5);
+    border-color: #000;
+    border-width: 3px;
+  }
+
+  .teambar button
+  {
+    background: #FFF39D;
+    border: none;
+    color: #000;
+  }
+
+  .teambar button:hover
+  {
+    background: #000;
+  }
+
+  .teambar button span
+  {
+    margin: -5px auto;
+  }
+
+  .setmenu button
+  {
+    color: #000;
+  }
+
+  .setmenu button:hover
+  {
+    background: rgba(255, 255, 255,0.5);
+    border-color: #000;
+    color: #000;
+  }
+
+  .setchart
+  {
+    background: #49614B;
+    border-color: #000;
+  }
+
+  .setchart label
+  {
+    color: #000;
+  }
+
+  .setchart input, .setchart input:hover, .setdetails, .setdetails:hover, .setstats, .setstats:hover, .statform input.numform, .statform input.numform:hover
+  {
+    border-color: #000;
+  }
+
+  .setchart .setdetails label, .setchart .setstats label
+  {
+    color: #000;
+    text-shadow: none;
+  }
+
+  .setchart-nickname
+  {
+    background: #FFE378;
+    border-color: #000;
+  }
+
+  .setchart-nickname label
+  {
+    color: #000;
+  }
+
+  .setchart-nickname input, .setchart-nickname input:hover
+  {
+    border-color: #000;
+  }
+
+  .utilichart .sortcol.cur, .utilichart .sortcol.cur:hover
+  {
+    background: #FFD285;
+    color: #000;
+    text-shadow: none;
+  }
+
+  .utilichart .sortrow
+  {
+    background: #FFD285;
+    border-color: #000;
+  }
+
+  .utilichart .sortcol
+  {
+    color: #000;
+  }
+
+  .utilichart .sortcol:hover
+  {
+    background: #FFD285;
+  }
+
+  .utilichart .filtercol em
+  {
+    border-color: #000;
+    color: #000;
+  }
+
+  .utilichart h3, .dexentry h3, .resultheader h3
+  {
+    background: #FFD285;
+    border-color: #FFD285;
+    color: #000;
+    text-shadow: none;
+  }
+
+  .teambuilder-results .result a.cur
+  {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: #000;
+  }
+
+  .teambuilder-results .result a.cur:hover, .teambuilder-results .result a:hover
+  {
+    background: rgba(255, 255, 255, 0.5);
+    border-color: #000;
+  }
+
+  .jslider .jslider-value
+  {
+    background: #FFD285;
+    border: 1px solid #000;
+    color: #000;
+  }
+
+  .utilichart .numcol
+  {
+    color: #000;
+  }
+ 
+  /***********************
+  * TEAMBUILDER CSS ~end *
+  ***********************/
+        /*************
+  * BATTLE CSS *
+  *************/
+  .sunweather,
+.sunnydayweather,
+.desolatelandweather
+  {
+    background: #FFEEBB url(http://i.imgur.com/DNMtOWR.gif) no-repeat scroll left top;
+    color: #664411;
+    text-shadow: #FFFFFF 1px 1px 0, #FFFFFF 1px -1px 0, #FFFFFF -1px 1px 0, #FFFFFF -1px -1px 0;
+    background-size: cover;
+  }
+
+  .rainweather,
+.raindanceweather,
+.primordialseaweather
+  {
+    background: #99BBFF url(http://i.imgur.com/NQqkU6j.gif) no-repeat scroll left top;
+    color: #0044BB;
+    text-shadow: #FFFFFF 1px 1px 0, #FFFFFF 1px -1px 0, #FFFFFF -1px 1px 0, #FFFFFF -1px -1px 0;
+  }
+
+  .sandstormweather
+  {
+    background: #E6E0AC url(http://i.imgur.com/OEB3hum.gif) no-repeat scroll left top;
+    color: #554433;
+    text-shadow: #FFFFFF 1px 1px 0, #FFFFFF 1px -1px 0, #FFFFFF -1px 1px 0, #FFFFFF -1px -1px 0;
+  }
+
+  .hailweather
+  {
+    background: #AADDEE url(http://i.imgur.com/PweinWm.gif) no-repeat scroll left top;
+    color: #114455;
+    text-shadow: #FFFFFF 1px 1px 0, #FFFFFF 1px -1px 0, #FFFFFF -1px 1px 0, #FFFFFF -1px -1px 0;
+  }
+
+  .deltastreamweather
+  {
+    background: #AAAAAA url(http://play.pokemonshowdown.com/fx/weather-strongwind.png) no-repeat scroll left top;
+    color: #666666;
+    text-shadow: #FFFFFF 1px 1px 0, #FFFFFF 1px -1px 0, #FFFFFF -1px 1px 0, #FFFFFF -1px -1px 0;
+  }
+
+  .pseudoweather
+  {
+    background: #DDAAEE url(http://play.pokemonshowdown.com/fx/weather-trickroom.png) no-repeat scroll left top;
+    color: #661155;
+    text-shadow: #FFFFFF 1px 1px 0, #FFFFFF 1px -1px 0, #FFFFFF -1px 1px 0, #FFFFFF -1px -1px 0;
+  }
+
+  .backdrop
+  {
+    width: 640px;
+    height: 360px;
     position: absolute;
-    top: 40px;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    border-top: 1px solid #AAAAAA;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-    overflow-scrolling: touch;
-  }
-
-  .teambuilder-results .result a
-  {
-    border-radius: 4px;
-    padding: 1px 1px 1px 5px;
-    margin: 0 5px 1px 5px;
-    background: transparent;
-    cursor: pointer;
-  }
-
-  .teambuilder-results .result a:hover
-  {
-    padding: 0px 0px 0px 4px;
-    border: 1px solid #D8D8D8;
-    background: #F8F8F8;
-  }
-
-  .teambuilder-results .firstresult a,.teambuilder-results .firstresult a:hover
-  {
-    padding: 0px 0px 0px 4px;
-    border: 1px solid #CCCCCC;
-    background: #F2F2F2;
-  }
-
-  .teambuilder-results h3,.teambuilder-results .utilichart h3
-  {
-    background: #DAE5F0;
-    margin: 6px 0;
-    padding: 2px 5px;
-    font-family: Verdana,sans-serif;
-    font-size: 9pt;
-    text-align: left;
-    border: 1px solid #AAAAAA;
-    border-left: 0;
-    border-right: 0;
-    text-shadow: 1px 1px 0 rgba(255,255,255,.6);
-    box-shadow: inset 1px 1px 0 rgba(255,255,255,.6),0px 2px 2px rgba(0,0,0,.15);
-  }
-
-  .teambuilder-pokemon-import
-  {
-    display: none;
-    position: absolute;
-    top: 206px;
-    left: 10px;
-    padding: 2px;
+    top: 0px;
+    left: 0px;
     overflow: hidden;
+    z-index: 0;
+    background-size: 100% 100% !important;
+    background-image: url(http://i.imgur.com/KXYj116.png);
+    opacity: 1 !important;
   }
 
-  .pokemonedit
+  .backdrop[style*="bg-beach.png"]
   {
-    width: 626px;
-    text-align: left;
-    font-size: inherit;
-    font-family: inherit;
+    background-image: url(http://i.imgur.com/KR5Xcgy.png) !important;
+    z-index: 0;
   }
 
-  .statform
+  .backdrop[style*="bg-beachshore.png"]
   {
-    padding: 3px 13px 10px 13px;
-    font-size: 10pt;
+    background-image: url(http://i.imgur.com/kuVq9Gb.png) !important;
+    z-index: 0;
   }
 
-  .statform p.suggested
+  .backdrop[style*="bg-city.png"]
   {
-    margin: 5px 0;
+    background-image: url(http://i.imgur.com/AqMv0Vr.png) !important;
+    z-index: 0;
   }
 
-  .statform .col>div
+  .backdrop[style*="bg-dampcave.png"]
   {
-    padding-top: 1px;
-    height: 28px;
+    background-image: url(http://i.imgur.com/te4lJOc.png) !important;
+    z-index: 0;
   }
 
-  .statform .col div label,.statform .col div em,.statform .col div b
+  .backdrop[style*="bg-deepsea.png"]
   {
-    display: block;
-    padding: 5px 0 0 0;
+    background-image: url(http://i.imgur.com/Kou1vu5.png) !important;
+    z-index: 0;
   }
 
-  .statform .col
+  .backdrop[style*="bg-desert.png"]
   {
-    float: left;
-    width: 52px;
-    text-align: right;
-    font-size: 9pt;
+    background-image: url(http://i.imgur.com/4EwQDTS.png) !important;
+    z-index: 0;
   }
 
-  .statform .basestatscol
+  .backdrop[style*="bg-earthycave.png"]
   {
-    width: 38px;
+    background-image: url(http://i.imgur.com/Ffd9WMk.png) !important;
+    z-index: 0;
   }
 
-  .statform .statscol
+  .backdrop[style*="bg-forest.png"]
   {
-    width: 36px;
+    background-image: url(http://i.imgur.com/ux0Qk2g.png) !important;
+    z-index: 0;
   }
 
-  .statform .statscol em,.statform .statscol b
+  .backdrop[style*="bg-icecave.png"]
   {
-    font-style: normal;
+    background-image: url(http://i.imgur.com/jm7L77m.png) !important;
+    z-index: 0;
+  }
+
+  .backdrop[style*="bg-meadow.png"]
+  {
+    background-image: url(http://i.imgur.com/S1UT6wM.png) !important;
+    z-index: 0;
+  }
+
+  .backdrop[style*="bg-mountain.png"]
+  {
+    background-image: url(http://i.imgur.com/vSMRAXr.png) !important;
+    z-index: 0;
+  }
+
+  .backdrop[style*="bg-river.png"]
+  {
+    background-image: url(http://i.imgur.com/0EQhNGM.png) !important;
+    z-index: 0;
+  }
+
+  .backdrop[style*="bg-route.png"]
+  {
+    background-image: url(http://i.imgur.com/7GGWeJ1.png) !important;
+    z-index: 0;
+  }
+
+  .backdrop[style*="bg-thunderplains.png"]
+  {
+    background-image: url(http://i.imgur.com/nRPiAi7.png) !important;
+    z-index: 0;
+  }
+
+  .backdrop[style*="bg-volcanocave.png"]
+  {
+    background-image: url(http://i.imgur.com/UA2v1nN.png) !important;
+    z-index: 0;
+  }
+
+  .backdrop[style*="bg-gen1.png"]
+  {
+    background-image: url(http://i.imgur.com/FjWc5ma.png) !important;
+    z-index: 0;
+  }
+
+  .ps-room.ps-room-opaque
+  {
+    background: rgba(228, 184, 82, 0.7);
+  }
+
+  .ps-room .battle-controls
+  {
+    background: rgba(255, 255, 255, 0.35);
+  }
+
+  .ps-room .battle-controls button, .ps-room .battle-controls .button
+  {
+    background: #FFAE7F;
+    padding: 3px 8px;
+    border: 1px solid #79330A;
+    color: #79330A;
+    text-shadow: 0px 0px 2px #C5E2C8;
+  }
+
+  .ps-room .battle-controls button:hover, .ps-room .battle-controls .button:hover
+  {
+    background: #FFC39F;
+    border-color: #79330A;
+  }
+
+  .battle-controls .whatdo
+  {
+    color: #2C392D;
+  }
+
+  .battle-controls .whatdo small
+  {
+    border-color: #455847;
+  }
+
+  .moveselect button
+  {
+    text-decoration: underline;
+    background: url("http://i.imgur.com/GPzZsG1.png") center left no-repeat !important;
+    background-position: left 8px !important;
+    padding-left: 30px !important;
+    border: none !important;
+    color: #F8D030 !important;
+    text-shadow: 1px 1px #903028, 1px -1px #903028, -1px 1px #903028, -1px -1px #903028 !important;
+  }
+
+  .movemenu button
+  {
+    height: 50px;
+    color: #FFF !important;
     font-weight: bold;
+    text-shadow: 1px 1px #000, 1px -1px #000, -1px 1px #000, -1px -1px #000 !important;
+    border-width: 2px !important;
+    border-style: solid !important;
   }
 
-  .statform .graphcol
+  .movemenu button small
   {
-    width: 185px;
+    text-shadow: none !important;
+    font-weight: normal;
   }
 
-  .statform .graphcol div span
+  .movemenu button.type-Normal
   {
-    margin: 3px 0 0 5px;
-    display: block;
-    height: 8px;
-    border-bottom: 1px solid #AAAAAA;
-    border-right: 1px solid #AAAAAA;
-    background: #CCCCCC;
+    background: #C7AFB5 url("http://i.imgur.com/3C1Bacx.png?2") center no-repeat !important;
+    border-color: #75525C !important;
   }
 
-  .statform .evcol,.statform .ivcol
+  .movemenu button.type-Normal small
   {
-    width: 48px;
-    text-align: center;
+    color: #75525C;
   }
 
-  .statform .evslidercol
+  .movemenu button.type-Normal:hover
   {
-    width: 193px;
-    margin-right: 9px;
-    margin-left: 5px;
-    padding-top: 7px;
-    text-align: center;
+    background: #DFCDD2 url("http://i.imgur.com/3C1Bacx.png?2") center no-repeat !important;
   }
 
-  .evslider
+  .movemenu button.type-Fire
   {
-    width: 192px;
-    margin: 0 auto;
+    background: #FD4B5A url("http://i.imgur.com/4sLBBTN.png?2") center no-repeat !important;
+    border-color: #AB1F24 !important;
   }
 
-  .statform .totalev b
+  .movemenu button.type-Fire small
   {
-    color: #DD2222;
+    color: #AB1F24;
   }
 
-  .statform .totalev em
+  .movemenu button.type-Fire:hover
   {
-    font-style: normal;
+    background: #FF767F url("http://i.imgur.com/4sLBBTN.png?2") center no-repeat !important;
   }
 
-  .statform input.numform
+  .movemenu button.type-Water
   {
-    width: 40px;
-    height: 16px;
-    font-size: 9pt;
+    background: #85A8FB url("http://i.imgur.com/K7r8LVH.png?2") center no-repeat !important;
+    border-color: #1552E1 !important;
   }
 
-  .detailsform .formrow
+  .movemenu button.type-Water small
   {
-    padding-left: 100px;
+    color: #1552E1;
   }
 
-  .detailsform .formrow .formlabel
+  .movemenu button.type-Water:hover
   {
-    float: left;
-    margin-left: -100px;
-    width: 95px;
-    text-align: right;
+    background: #A9C3FF url("http://i.imgur.com/K7r8LVH.png?2") center no-repeat !important;
   }
 
-  .ps-popup .label
+  .movemenu button.type-Grass
   {
-    width: 210px;
-    margin: 0 auto;
+    background: #42C665 url("http://i.imgur.com/628FI5x.png?2") center no-repeat !important;
+    border-color: #147B3D !important;
   }
 
-  .ps-popup .textbox
+  .movemenu button.type-Grass small
   {
-    width: 200px;
+    color: #147B3D;
   }
 
-  .userdetails
+  .movemenu button.type-Grass:hover
   {
-    min-height: 80px;
-    width: 191px;
-    padding: 1px 1px 1px 86px;
-    margin: 5px 0;
+    background: #56D879 url("http://i.imgur.com/628FI5x.png?2") center no-repeat !important;
   }
 
-  .userdetails img
+  .movemenu button.type-Electric
   {
-    float: left;
-    margin-left: -85px;
+    background: #FAFA72 url("http://i.imgur.com/bzW9xyl.png?2") center no-repeat !important;
+    border-color: #C6C61D !important;
   }
 
-  .userdetails .rooms
+  .movemenu button.type-Electric small
   {
-    font-size: 8pt;
+    color: #C6C61D;
   }
 
-  .userdetails .offline
+  .movemenu button.type-Electric:hover
   {
-    color: red;
+    background: #FFFF9B url("http://i.imgur.com/bzW9xyl.png?2") center no-repeat !important;
   }
 
-  .trainersprite.yours
+  .movemenu button.type-Ice
   {
-    cursor: pointer;
+    background: #D8F0FA url("http://i.imgur.com/otB37l2.png?2") center no-repeat !important;
+    border-color: #7CC6EB !important;
   }
 
-  .buttonbar
+  .movemenu button.type-Ice small
   {
-    clear: both;
+    color: #7CC6EB;
   }
 
-  .avatarlist button
+  .movemenu button.type-Ice:hover
   {
-    display: block;
-    float: left;
-    margin: 2px;
-    width: 80px;
-    height: 80px;
-    border: 1px solid #E1E8E8;
-    background: transparent url(http://play.pokemonshowdown.com/sprites/trainers-sheet.png) no-repeat scroll 0px 0px;
-    border-radius: 4px;
-    box-shadow: none;
-    cursor: pointer;
+    background: #E6F8FF url("http://i.imgur.com/otB37l2.png?2") center no-repeat !important;
   }
 
-  .avatarlist button.cur
+  .movemenu button.type-Ground
   {
-    border-color: #999999;
+    background: #A8702D url("http://i.imgur.com/F2Ngn3T.png?2") center no-repeat !important;
+    border-color: #6E491F !important;
   }
 
-  .avatarlist button:hover,.avatarlist button.cur:hover
+  .movemenu button.type-Ground small
   {
-    border: 1px solid #8899AA;
-    background-color: #F1F4F9;
-    box-shadow: 1px 1px 1px #D5D5D5;
+    color: #6E491F;
   }
 
-  .effect-volume,.music-volume
+  .movemenu button.type-Ground:hover
   {
-    height: 39px;
+    background: #BA843C url("http://i.imgur.com/F2Ngn3T.png?2") center no-repeat !important;
   }
 
-  .effect-volume label,.music-volume label
+  .movemenu button.type-Flying
   {
-    padding-bottom: 12px;
-    font-size: 8pt;
+    background: #94B2C7 url("http://i.imgur.com/Al6Gb8u.png?2") center no-repeat !important;
+    border-color: #4A677D !important;
   }
 
-  .effect-volume em,.music-volume em
+  .movemenu button.type-Flying small
   {
-    display: block;
-    margin-top: -6px;
-    font-size: 9pt;
-    padding-left: 5px;
-    color: #555555;
+    color: #4A677D;
   }
 
-  blink
+  .movemenu button.type-Flying:hover
   {
-    -webkit-animation-name: blinker;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-timing-function: cubic-bezier(1.0,0,0,1.0);
-    -webkit-animation-duration: 1s;
-    animation-name: blinker;
-    animation-iteration-count: infinite;
-    animation-timing-function: cubic-bezier(1.0,0,0,1.0);
-    animation-duration: 1s;
-    text-decoration: none;
+    background: #A4C0D5 url("http://i.imgur.com/Al6Gb8u.png?2") center no-repeat !important;
   }
+
+  .movemenu button.type-Poison
+  {
+    background: #9B69DA url("http://i.imgur.com/d3QQ9Af.png?2") center no-repeat !important;
+    border-color: #5E2D89 !important;
+  }
+
+  .movemenu button.type-Poison small
+  {
+    color: #5E2D89;
+  }
+
+  .movemenu button.type-Poison:hover
+  {
+    background: #BF8EF6 url("http://i.imgur.com/d3QQ9Af.png?2") center no-repeat !important;
+  }
+
+  .movemenu button.type-Fighting
+  {
+    background: #EF6239 url("http://i.imgur.com/0fjqBIB.png?2") center no-repeat !important;
+    border-color: #994025 !important;
+  }
+
+  .movemenu button.type-Fighting small
+  {
+    color: #994025;
+  }
+
+  .movemenu button.type-Fighting:hover
+  {
+    background: #FA7851 url("http://i.imgur.com/0fjqBIB.png?2") center no-repeat !important;
+  }
+
+  .movemenu button.type-Psychic
+  {
+    background: #F369B3 url("http://i.imgur.com/QzQIgYi.png?2") center no-repeat !important;
+    border-color: #A52A6C !important;
+  }
+
+  .movemenu button.type-Psychic small
+  {
+    color: #A52A6C;
+  }
+
+  .movemenu button.type-Psychic:hover
+  {
+    background: #FD7DC1 url("http://i.imgur.com/QzQIgYi.png?2") center no-repeat !important;
+  }
+
+  .movemenu button.type-Dark
+  {
+    background: #595978 url("http://i.imgur.com/dpxY9u7.png?2") center no-repeat !important;
+    border-color: #040707 !important;
+  }
+
+  .movemenu button.type-Dark small
+  {
+    color: #040707;
+  }
+
+  .movemenu button.type-Dark:hover
+  {
+    background: #737392 url("http://i.imgur.com/dpxY9u7.png?2") center no-repeat !important;
+  }
+
+  .movemenu button.type-Rock
+  {
+    background: #8B3E22 url("http://i.imgur.com/uQRUH3r.png?2") center no-repeat !important;
+    border-color: #48190B !important;
+  }
+
+  .movemenu button.type-Rock small
+  {
+    color: #48190B;
+  }
+
+  .movemenu button.type-Rock:hover
+  {
+    background: #A25032 url("http://i.imgur.com/uQRUH3r.png?2") center no-repeat !important;
+  }
+
+  .movemenu button.type-Bug
+  {
+    background: #3C9950 url("http://i.imgur.com/oPBAAYf.png?2") center no-repeat !important;
+    border-color: #1C4B27 !important;
+  }
+
+  .movemenu button.type-Bug small
+  {
+    color: #1C4B27;
+  }
+
+  .movemenu button.type-Bug:hover
+  {
+    background: #4FAF65 url("http://i.imgur.com/oPBAAYf.png?2") center no-repeat !important;
+  }
+
+  .movemenu button.type-Ghost
+  {
+    background: #906791 url("http://i.imgur.com/jwbeQbI.png?2") center no-repeat !important;
+    border-color: #33336B !important;
+  }
+
+  .movemenu button.type-Ghost small
+  {
+    color: #33336B;
+  }
+
+  .movemenu button.type-Ghost:hover
+  {
+    background: #AE81AE url("http://i.imgur.com/jwbeQbI.png?2") center no-repeat !important;
+  }
+
+  .movemenu button.type-Steel
+  {
+    background: #60756E url("http://i.imgur.com/KCc2bLu.png?2") center no-repeat !important;
+    border-color: #38A480 !important;
+  }
+
+  .movemenu button.type-Steel small
+  {
+    color: #38A480;
+  }
+
+  .movemenu button.type-Steel:hover
+  {
+    background: #829790 url("http://i.imgur.com/KCc2bLu.png?2") center no-repeat !important;
+  }
+
+  .movemenu button.type-Dragon
+  {
+    background: #62CAD9 url("http://i.imgur.com/ygEvaDc.png?2") center no-repeat !important;
+    border-color: #448A95 !important;
+  }
+
+  .movemenu button.type-Dragon small
+  {
+    color: #448A95;
+  }
+
+  .movemenu button.type-Dragon:hover
+  {
+    background: #7EDCEB url("http://i.imgur.com/ygEvaDc.png?2") center no-repeat !important;
+  }
+
+  .movemenu button.type-Fairy
+  {
+    background: #E91368 url("http://i.imgur.com/0qO7BN7.png?2") center no-repeat !important;
+    border-color: #961A45 !important;
+  }
+
+  .movemenu button.type-Fairy small
+  {
+    color: #961A45;
+  }
+
+  .movemenu button.type-Fairy:hover
+  {
+    background: #FF3C8A url("http://i.imgur.com/0qO7BN7.png?2") center no-repeat !important;
+  }
+
+  .switchselect button
+  {
+    text-decoration: underline;
+    background: url("http://i.imgur.com/d0UDk9G.png") bottom left no-repeat !important;
+    padding-left: 15px !important;
+    background-position: left 10px !important;
+    border: none !important;
+    color: #000 !important;
+  }
+
+  .switchmenu button.disabled, .switchmenu button:disabled
+  {
+    background: rgba(255, 237, 164, 0.5) !important;
+    border-width: 2px;
+    border-color: #000 !important;
+    color: #000 !important;
+    font-weight: bold;
+    text-shadow: none !important;
+  }
+
+  .switchmenu button
+  {
+    padding: 5px 5px 5px 0 !important;
+  }
+
+  .switchmenu button .hpbar
+  {
+    border-color: #000;
+  }
+
+  .megaevo
+  {
+    background: none;
+    border: none;
+    color: #000;
+  }
+
+  .leftbar, .rightbar
+  {
+    background: rgba(244, 186, 107, 0.7);
+    border-color: #0000;
+  }
+
+  .trainer strong
+  {
+    color: #000;
+  }
+
+  .battle
+  {
+    border-color: #000 !important;
+  }
+
+  .battle-log
+  {
+    background: rgba(255, 235, 127, 0.8) url("http://i.imgur.com/JirWZpl.jpg") top right no-repeat;
+    border-color: #000;
+  }
+
+  .battle-log-add
+  {
+    background: transparent;
+    border-top-color: #000716;
+    border-left-color: #000716;
+    color: 000;
+  }
+
+  .battle-log-add .textbox, .battle-log-add .textbox:hover, .battle-log-add .textbox:focus
+  {
+    border-color: #000;
+  }
+
+  .battle-log h2
+  {
+    background: #FFB57F;
+    border-color: 000;
+    color: #000;
+  }
+
+  .turn
+  {
+    opacity: 0.7 !important;
+    background: #FFB752;
+    padding: 4px 8px;
+    border-width: 1px;
+    border-color: #000;
+    color: #000;
+    font-weight: normal;
+    font-style: italic;
+  }
+
+  .battle-log .rated strong
+  {
+    background: #000;
+    font-style: italic;
+  }
+ 
+  /******************
+  * BATTLE CSS ~end *
+  ******************/
+ /************
+ * dark mode *
+ ************/
+ 
+  .dark .textbox, .dark .textbox:focus
+  {
+    color: white;
+  }
+  /******************
+   * Dark Mode End *
+   ******************/;
 }
